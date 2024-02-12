@@ -1,7 +1,6 @@
 #ifndef INC_VECTOR_H
 #define INC_VECTOR_H
 
-#include <stdint.h>
 #include <stdio.h>
 
 typedef struct vector {

@@ -2,6 +2,17 @@
 #include <stdlib.h>
 #include <assert.h>
 #include "libs/data_structures/vector/vector.c"
+#include "libs/data_structures/vector/vectorVoid.c"
+
+
+void exampleVectorVoid() {
+    vectorVoid vec;
+
+    vec.data = NULL;
+    vec.size = 0;
+    vec.capacity = 0;
+    vec.baseTypeSize = sizeof(int);
+}
 
 void test_pushBack_emptyVector() {
     vector v = createVector(0);
