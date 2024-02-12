@@ -1,77 +1,51 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <assert.h>
+#include "libs/data_structures/vector/vector.c"
 
-typedef struct vector {
-    int *data;      // указатель на элементы вектора
-    size_t size;    // размер вектора
-    size_t capacity;// вместимость вектора
-} vector;
-
-vector createVector(size_t n) {
-    vector vec;
-    vec.data = NULL;
-    vec.size = 0;
-    vec.capacity = 0;
-
-    if (n > 0) {
-        vec.data = (int *)malloc(n * sizeof(int));
-        if (vec.data == NULL) {
-            fprintf(stderr, "bad alloc");
-            exit(1);
-        }
-        vec.size = n;
-        vec.capacity = n;
-    }
-
-    return vec;
+void test_pushBack_emptyVector() {
+    vector v = createVector(0);
+    
+    pushBack(&v, 5);
+    
+    assert(v.size == 1);
+    assert(v.data[0] == 5);
+    
+    deleteVector(&v);
 }
 
-void reserve(vector *v, size_t newCapacity) {
-    if (newCapacity == 0) {
-        free(v->data);
-        v->data = NULL;
-        v->capacity = 0;
-        v->size = 0;
-    } else if (newCapacity < v->size) {
-        v->size = newCapacity;
-    } else {
-        int *new_data = (int *)realloc(v->data, newCapacity * sizeof(int));
-        if (new_data == NULL) {
-            fprintf(stderr, "bad alloc");
-            exit(1);
-        }
-        v->data = new_data;
-        v->capacity = newCapacity;
-    }
+void test_pushBack_fullVector() {
+    vector v = createVector(10);
+
+    pushBack(&v, 14);
+    
+    assert(v.size == 11);
+    assert(v.data[v.size - 1] == 14);
+    
+    deleteVector(&v);
 }
 
+void test_popBack_notEmptyVector() {
+    vector v = createVector(0);
 
-void clear(vector *v) {
-    v->size = 0;
+    pushBack(&v, 10);
+
+    assert(v.size == 1);
+
+    popBack(&v);
+
+    assert(v.size == 0);
+    assert(v.capacity == 1);
 }
 
-void shrinkToFit(vector *v) {
-    v->data = (int *)realloc(v->data, v->size * sizeof(int));
+void test() {
+    test_pushBack_emptyVector();
+    test_pushBack_fullVector();
+    test_popBack_notEmptyVector();
 }
-
-void deleteVector(vector *v) {
-    free(v->data);
-    v->data = NULL;
-    v->size = 0; 
-    v->capacity = 0;
-}
-
 
 int main() {
-    vector vec = createVector(5);
-
-    reserve(&vec, 10);
-
-    clear(&vec);
-
-    shrinkToFit(&vec);
-
-    deleteVector(&vec);
+    test();
 
     return 0;
 }

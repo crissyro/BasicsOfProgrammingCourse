@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdbool.h>
 
 typedef struct vector {
     int *data;      // указатель на элементы вектора
@@ -34,7 +35,7 @@ void reserve(vector *v, size_t newCapacity) {
         v->size = 0;
     } else if (newCapacity < v->size) {
         v->size = newCapacity;
-    } else {
+    } else if (newCapacity > v->capacity) {
         int *new_data = (int *)realloc(v->data, newCapacity * sizeof(int));
         if (new_data == NULL) {
             fprintf(stderr, "bad alloc");
@@ -59,4 +60,34 @@ void deleteVector(vector *v) {
     v->data = NULL;
     v->size = 0; 
     v->capacity = 0;
+}
+
+bool isEmpty(vector *v) {
+    return v->size == 0;
+}
+
+bool isFull(vector *v) {
+    return v->size == v->capacity;
+}
+
+int getVectorValue(vector *v, size_t i) {
+    return v->data[i];
+}
+
+void pushBack(vector *v, int x) {
+    if (v->size == v->capacity) {
+        size_t newCapacity = (v->capacity == 0) ? 1 : v->capacity * 2;
+        reserve(v, newCapacity);
+    }
+
+    v->data[v->size++] = x;
+}
+
+void popBack(vector *v) {
+    if (v->size == 0) {
+        fprintf(stderr, "vector is empty");
+        exit(1);
+    }
+    
+    v->size--;
 }
