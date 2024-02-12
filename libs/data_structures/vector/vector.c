@@ -60,18 +60,3 @@ void deleteVector(vector *v) {
     v->size = 0; 
     v->capacity = 0;
 }
-
-
-int main() {
-    vector vec = createVector(5);
-
-    reserve(&vec, 10);
-
-    clear(&vec);
-
-    shrinkToFit(&vec);
-
-    deleteVector(&vec);
-
-    return 0;
-}
