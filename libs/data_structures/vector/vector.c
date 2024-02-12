@@ -16,10 +16,12 @@ vector createVector(size_t n) {
 
     if (n > 0) {
         vec.data = (int *)malloc(n * sizeof(int));
+
         if (vec.data == NULL) {
             fprintf(stderr, "bad alloc");
             exit(1);
         }
+
         vec.size = n;
         vec.capacity = n;
     }
@@ -37,10 +39,12 @@ void reserve(vector *v, size_t newCapacity) {
         v->size = newCapacity;
     } else if (newCapacity > v->capacity) {
         int *new_data = (int *)realloc(v->data, newCapacity * sizeof(int));
+
         if (new_data == NULL) {
             fprintf(stderr, "bad alloc");
             exit(1);
         }
+        
         v->data = new_data;
         v->capacity = newCapacity;
     }
