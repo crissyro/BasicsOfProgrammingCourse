@@ -70,3 +70,49 @@ void deleteVectorV(vectorVoid *v) {
     v->capacity = 0;
     v->baseTypeSize = 0;
 }
+
+bool isEmptyV(vectorVoid *v) {
+    return v->size == 0;
+}
+
+bool isFullV(vectorVoid *v) {
+    return v->size == v->capacity;
+}
+
+void getVectorValueV(vectorVoid *v, size_t index, void *destination) {
+    if (index >= v->size) {
+        fprintf(stderr, "Index out of range");
+        exit(1);
+    }
+
+    char *source = (char *)v->data + index * v->baseTypeSize;
+    memcpy(destination, source, v->baseTypeSize);
+}
+
+void setVectorValueV(vectorVoid *v, size_t index, void *source) {
+    if (index >= v->size) {
+        fprintf(stderr, "Index out of range");
+        exit(1);
+    }
+
+    char *destination = (char *)v->data + index * v->baseTypeSize;
+    memcpy(destination, source, v->baseTypeSize);
+}
+
+void popBackV(vectorVoid *v) {
+    if (v->size == 0) {
+        fprintf(stderr, "vector is empty");
+        exit(1);
+    }
+    v->size--;
+}
+
+void pushBackV(vectorVoid *v, void *source) {
+    if (v->size == v->capacity) {
+        size_t newCapacity = (v->capacity == 0) ? 1 : v->capacity * 2;
+        reserveV(v, newCapacity);
+    }
+    char *destination = (char *)v->data + v->size * v->baseTypeSize;
+    memcpy(destination, source, v->baseTypeSize);
+    v->size++;
+}
