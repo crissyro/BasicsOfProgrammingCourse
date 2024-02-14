@@ -46,7 +46,7 @@ void reserveV(vectorVoid *v, size_t newCapacity) {
         void *new_data = realloc(v->data, newCapacity * v->baseTypeSize);
 
         if (new_data == NULL) {
-            fprintf(stderr, "bad alloc");
+            fprintf(stderr, "Bad alloc");
             exit(1);
         }
 
@@ -101,9 +101,10 @@ void setVectorValueV(vectorVoid *v, size_t index, void *source) {
 
 void popBackV(vectorVoid *v) {
     if (v->size == 0) {
-        fprintf(stderr, "vector is empty");
+        fprintf(stderr, "Vector is empty");
         exit(1);
     }
+
     v->size--;
 }
 
@@ -112,7 +113,9 @@ void pushBackV(vectorVoid *v, void *source) {
         size_t newCapacity = (v->capacity == 0) ? 1 : v->capacity * 2;
         reserveV(v, newCapacity);
     }
+
     char *destination = (char *)v->data + v->size * v->baseTypeSize;
     memcpy(destination, source, v->baseTypeSize);
+
     v->size++;
 }

@@ -18,7 +18,7 @@ vector createVector(size_t n) {
         vec.data = (int *)malloc(n * sizeof(int));
 
         if (vec.data == NULL) {
-            fprintf(stderr, "bad alloc");
+            fprintf(stderr, "Bad alloc");
             exit(1);
         }
 
@@ -41,7 +41,7 @@ void reserve(vector *v, size_t newCapacity) {
         int *new_data = (int *)realloc(v->data, newCapacity * sizeof(int));
 
         if (new_data == NULL) {
-            fprintf(stderr, "bad alloc");
+            fprintf(stderr, "Bad alloc");
             exit(1);
         }
         
@@ -89,7 +89,7 @@ void pushBack(vector *v, int x) {
 
 void popBack(vector *v) {
     if (v->size == 0) {
-        fprintf(stderr, "vector is empty");
+        fprintf(stderr, "Vector is empty");
         exit(1);
     }
     
@@ -107,7 +107,7 @@ int* atVector(vector *v, size_t index) {
 
 int* back(vector *v) {
     if (v->size == 0) {
-        fprintf(stderr, "vector is empty");
+        fprintf(stderr, "Vector is empty");
         exit(1);
     }
 
@@ -116,7 +116,7 @@ int* back(vector *v) {
 
 int* front(vector *v) {
     if (v->size == 0) {
-        fprintf(stderr, "vector is empty");
+        fprintf(stderr, "Vector is empty");
         exit(1);
     } 
 

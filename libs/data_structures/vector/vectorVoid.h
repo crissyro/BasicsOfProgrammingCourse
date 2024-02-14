@@ -46,6 +46,6 @@ void setVectorValueV(vectorVoid *v, size_t index, void *source) ;
 void pushBackV(vectorVoid *v, void *source) ;
 
 //удаляет последний элемент из вектора
-void popBackV(vectorVoid *v); ;
+void popBackV(vectorVoid *v) ;
 
 #endif
