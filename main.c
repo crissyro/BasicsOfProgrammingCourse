@@ -7,12 +7,12 @@ void test_getMemMatrix() {
     int nRows = 3;
     int nCols = 4;
 
-    matrix matrix = getMemMatrix(nRows, nCols);
+    matrix test_matrix = getMemMatrix(nRows, nCols);
 
-    assert(matrix.nRows == 3);
-    assert(matrix.nCols == 4);
+    assert(test_matrix.nRows == 3);
+    assert(test_matrix.nCols == 4);
 
-    freeMemMatrix(&matrix);
+    freeMemMatrix(&test_matrix);
 }
 
 void test_getMemArrayOfMatrices() {
@@ -29,9 +29,39 @@ void test_getMemArrayOfMatrices() {
     freeMemMatrices(ms, nMatrices);
 }
 
+
+void test_inputOutputMatrix() {
+    matrix test_matrix;
+
+    printf("Enter matrix:\n");
+    inputMatrix(&test_matrix);
+
+    printf("Entered matrix:\n");
+    outputMatrix(test_matrix);
+
+    freeMemMatrix(&test_matrix);
+}
+
+void test_inputOutputMatrices() {
+    int nMatrices = 2;
+    matrix matrices[nMatrices];
+
+    printf("Enter %d matrices:\n", nMatrices);
+    inputMatrices(matrices, nMatrices);
+
+    printf("Entered matrices:\n");
+    outputMatrices(matrices, nMatrices);
+
+    for (int i = 0; i < nMatrices; i++) {
+        freeMemMatrix(&matrices[i]);
+    }
+}
+
 void test() {
     test_getMemMatrix() ;
     test_getMemArrayOfMatrices() ;
+    test_inputOutputMatrix() ;
+    test_inputOutputMatrices() ;
 }
 
 int main() {
