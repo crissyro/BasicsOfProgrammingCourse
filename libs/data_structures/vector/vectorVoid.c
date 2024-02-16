@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include "vectorVoid.h"
 
 typedef struct vectorVoid {
     void *data; // указатель на нулевой элемент вектора
