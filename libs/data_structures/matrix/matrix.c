@@ -67,3 +67,21 @@ void outputMatrices(matrix *ms, int nMatrices) {
         outputMatrix(ms[i]);
     }
 }
+
+void swapRows(matrix m, int i1, int i2) {
+    assert(i1 >= 0 && i1 < m.nRows && i2 >= 0 && i2 < m.nRows);
+
+    int *temp = m.values[i1];
+    m.values[i1] = m.values[i2];
+    m.values[i2] = temp;
+}
+
+void swapColumns(matrix m, int j1, int j2) {
+    assert(j1 >= 0 && j1 < m.nCols && j2 >= 0 && j2 < m.nCols);
+
+    for (int i = 0; i < m.nRows; i++) {
+        int temp = m.values[i][j1];
+        m.values[i][j1] = m.values[i][j2];
+        m.values[i][j2] = temp;
+    }
+}

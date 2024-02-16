@@ -57,11 +57,22 @@ void test_inputOutputMatrices() {
     }
 }
 
+void test_swapRowsColumns() {
+    matrix test_matrix = {3, 3, (int *[]){{1, 2, 3}, {4, 5, 6}, {7, 8, 9}}};
+
+    swapRows(test_matrix, 0, 2);
+    assert(test_matrix.values[0][0] == 7 && test_matrix.values[2][0] == 1);
+
+    swapColumns(test_matrix, 0, 2);
+    assert(test_matrix.values[0][0] == 3 && test_matrix.values[0][2] == 1);
+}
+
 void test() {
     test_getMemMatrix() ;
     test_getMemArrayOfMatrices() ;
     test_inputOutputMatrix() ;
     test_inputOutputMatrices() ;
+    test_swapRowsColumns() ;
 }
 
 int main() {
