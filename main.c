@@ -149,6 +149,16 @@ void test_transposeSquareMatrix() {
     assert(m.values[2][0] == 3 && m.values[2][1] == 6 && m.values[2][2] == 9);
 }
 
+void test_MinMaxValuesPosition() {
+    matrix m = {3, 3, (int *[]){{1, 2, 3}, {4, 5, 6}, {7, 8, 9}}};
+
+    position min_position = getMinValuePos(m);
+    assert(min_position.rowIndex == 0 && min_position.colIndex == 0);
+
+    position max_position = getMaxValuePos(m);
+    assert(max_position.rowIndex == 2 && max_position.colIndex == 2);
+}
+
 void test() {
     test_getMemMatrix() ;
     test_getMemArrayOfMatrices() ;
@@ -161,7 +171,7 @@ void test() {
     test_isSymmetricMatrix() ;
     test_transposeMatrix() ;
     test_transposeSquareMatrix() ;
-
+    test_MinMaxValuesPosition() ;
 }
 
 int main() {
