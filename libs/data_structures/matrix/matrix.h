@@ -68,4 +68,10 @@ bool isEMatrix(matrix *m) ;
 //если матрица m является симметричной, ложь – в противном случае
 bool isSymmetricMatrix(matrix *m) ;
 
+//транспонирует квадратную матрицу m
+void transposeSquareMatrix(matrix *m)  ;
+
+//транспонирует матрицу m
+void transposeMatrix(matrix *m) ;
+
 #endif

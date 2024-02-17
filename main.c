@@ -128,6 +128,27 @@ void test_isSymmetricMatrix() {
     assert(isSymmetricMatrix(&m2) == 0);
 }
 
+void test_transposeMatrix() {
+    matrix m = {3, 2, (int *[]){{1, 2}, {3, 4}, {5, 6}}};
+    transposeMatrix(&m);
+
+    assert(m.nRows == 2);
+    assert(m.nCols == 3);
+    assert(m.values[0][0] == 1 && m.values[0][1] == 3 && m.values[0][2] == 5);
+    assert(m.values[1][0] == 2 && m.values[1][1] == 4 && m.values[1][2] == 6);
+}
+
+void test_transposeSquareMatrix() {
+    matrix m = {3, 3, (int *[]){{1, 2, 3}, {4, 5, 6}, {7, 8, 9}}};
+    transposeSquareMatrix(&m);
+
+    assert(m.nRows == 3);
+    assert(m.nCols == 3);
+    assert(m.values[0][0] == 1 && m.values[0][1] == 4 && m.values[0][2] == 7);
+    assert(m.values[1][0] == 2 && m.values[1][1] == 5 && m.values[1][2] == 8);
+    assert(m.values[2][0] == 3 && m.values[2][1] == 6 && m.values[2][2] == 9);
+}
+
 void test() {
     test_getMemMatrix() ;
     test_getMemArrayOfMatrices() ;
@@ -138,6 +159,9 @@ void test() {
     test_areTwoMatricesEqual() ;
     test_isEMatrix() ;
     test_isSymmetricMatrix() ;
+    test_transposeMatrix() ;
+    test_transposeSquareMatrix() ;
+
 }
 
 int main() {
