@@ -67,12 +67,49 @@ void test_swapRowsColumns() {
     assert(test_matrix.values[0][0] == 3 && test_matrix.values[0][2] == 1);
 }
 
+int getSum(int *row, int n) {
+    int sum = 0;
+    for (int i = 0; i < n; i++) {
+        sum += row[i];
+    }
+    return sum;
+}
+
+int compareMatrices(matrix m1, matrix m2) {
+    if (m1.nRows != m2.nRows || m1.nCols != m2.nCols) {
+        return 0;
+    }
+
+    for (int i = 0; i < m1.nRows; i++) {
+        for (int j = 0; j < m1.nCols; j++) {
+            if (m1.values[i][j] != m2.values[i][j]) {
+                return 0;
+            }
+        }
+    }
+
+    return 1;
+}
+
+void test_sortRowsColumns() {
+    matrix test_matrix = {3, 3, (int *[]){{30, 2, 3}, {4, 5, 6}, {7, 8, 9}}};
+
+    insertionSortRowsMatrixByRowCriteria(test_matrix, &getSum);
+    assert(compareMatrices(test_matrix, (matrix){3, 3, (int *[]){{4, 5, 6}, {7, 8, 9}, {30, 2, 3}}}));
+
+    selectionSortColsMatrixByColCriteria(test_matrix, &getSum);
+    assert(compareMatrices(test_matrix, (matrix){3, 3, (int *[]){{5, 6, 4}, {8, 9, 7}, {2, 3, 30}}}));
+
+    freeMemMatrix(&test_matrix);
+}
+
 void test() {
     test_getMemMatrix() ;
     test_getMemArrayOfMatrices() ;
     test_inputOutputMatrix() ;
     test_inputOutputMatrices() ;
     test_swapRowsColumns() ;
+    test_sortRowsColumns() ;
 }
 
 int main() {

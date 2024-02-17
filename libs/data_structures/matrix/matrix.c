@@ -85,3 +85,72 @@ void swapColumns(matrix m, int j1, int j2) {
         m.values[i][j2] = temp;
     }
 }
+
+void insertionSortRowsMatrixByRowCriteria(matrix m, int (*criteria)(int*, int)) {
+    int *criteria_values = malloc(m.nRows * sizeof(int));
+    if (criteria_values == NULL) {
+        fprintf(stderr, "Memory allocation failed\n");
+        exit(1);
+    }
+
+    for (int i = 0; i < m.nRows; i++) {
+        criteria_values[i] = criteria(m.values[i], m.nCols);
+    }
+
+    for (int i = 1; i < m.nRows; i++) {
+        int key = criteria_values[i];
+        int *key_row = m.values[i];
+        int j = i - 1;
+        while (j >= 0 && criteria_values[j] > key) {
+            criteria_values[j + 1] = criteria_values[j];
+            swapRows(m, j + 1, j);
+            j = j - 1;
+        }
+        criteria_values[j + 1] = key;
+        m.values[j + 1] = key_row;
+    }
+
+    free(criteria_values);
+}
+
+void selectionSortColsMatrixByColCriteria(matrix m, int (*criteria)(int*, int)) {
+    int *criteriaValues = (int *) malloc(m.nCols * sizeof(int));
+    if (criteriaValues == NULL) {
+        fprintf(stderr, "Memory allocation failed\n");
+        exit(1);
+    }
+
+    int *temp_column = (int *) malloc(m.nRows * sizeof(int));
+    if (temp_column == NULL) {
+        fprintf(stderr, "Memory allocation failed\n");
+        exit(1);
+    }
+
+    for (int j = 0; j < m.nCols; j++) {
+        for (int i = 0; i < m.nRows; i++) {
+            temp_column[i] = m.values[i][j];
+        }
+
+        criteriaValues[j] = criteria(temp_column, m.nRows);
+    }
+
+    free(temp_column);
+
+    for (int i = 0; i < m.nCols - 1; i++) {
+        int minIndex = i;
+        for (int j = i + 1; j < m.nCols; j++) {
+            if (criteriaValues[j] < criteriaValues[minIndex]) {
+                minIndex = j;
+            }
+        }
+
+        if (minIndex != i) {
+            swapColumns(m, i, minIndex);
+            int temp = criteriaValues[i];
+            criteriaValues[i] = criteriaValues[minIndex];
+            criteriaValues[minIndex] = temp;
+        }
+    }
+
+    free(criteriaValues);
+}
