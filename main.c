@@ -159,6 +159,24 @@ void test_MinMaxValuesPosition() {
     assert(max_position.rowIndex == 2 && max_position.colIndex == 2);
 }
 
+// пример использования функции createMatrixFromArray
+// void test_countZeroRows() {
+//     matrix m = createMatrixFromArray(
+//         (int[]) {
+//             1, 1, 0,
+//             0, 0, 0,
+//             0, 0, 1,
+//             0, 0, 0,
+//             0, 1, 1,
+//         },
+//         5, 3
+//     );
+
+//     assert(countZeroRows(m, 5, 3) == 2);
+
+//     freeMemMatrix(&m);
+// }
+
 void test() {
     test_getMemMatrix() ;
     test_getMemArrayOfMatrices() ;
