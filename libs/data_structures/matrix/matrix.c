@@ -5,15 +5,19 @@
 
 matrix getMemMatrix(int nRows, int nCols) {
     int **values = (int **) malloc(sizeof(int*) * nRows);
-    for (int i = 0; i < nRows; i++)
+    for (int i = 0; i < nRows; i++) {
         values[i] = (int *) malloc(sizeof(int) * nCols);
+    }
+
     return (matrix){values, nRows, nCols};
 }
 
 matrix *getMemArrayOfMatrices(int nMatrices, int nRows, int nCols) {
     matrix *ms = (matrix*) malloc(sizeof(matrix) * nMatrices);
-    for (int i = 0; i < nMatrices; i++)
+    for (int i = 0; i < nMatrices; i++) {
         ms[i] = getMemMatrix(nRows, nCols);
+    }
+
     return ms;
 }
 
@@ -101,11 +105,13 @@ void insertionSortRowsMatrixByRowCriteria(matrix m, int (*criteria)(int*, int)) 
         int key = criteria_values[i];
         int *key_row = m.values[i];
         int j = i - 1;
+
         while (j >= 0 && criteria_values[j] > key) {
             criteria_values[j + 1] = criteria_values[j];
             swapRows(m, j + 1, j);
             j = j - 1;
         }
+
         criteria_values[j + 1] = key;
         m.values[j + 1] = key_row;
     }
@@ -114,8 +120,8 @@ void insertionSortRowsMatrixByRowCriteria(matrix m, int (*criteria)(int*, int)) 
 }
 
 void selectionSortColsMatrixByColCriteria(matrix m, int (*criteria)(int*, int)) {
-    int *criteriaValues = (int *) malloc(m.nCols * sizeof(int));
-    if (criteriaValues == NULL) {
+    int *criteria_values = (int *) malloc(m.nCols * sizeof(int));
+    if (criteria_values == NULL) {
         fprintf(stderr, "Memory allocation failed\n");
         exit(1);
     }
@@ -131,28 +137,28 @@ void selectionSortColsMatrixByColCriteria(matrix m, int (*criteria)(int*, int)) 
             temp_column[i] = m.values[i][j];
         }
 
-        criteriaValues[j] = criteria(temp_column, m.nRows);
+        criteria_values[j] = criteria(temp_column, m.nRows);
     }
 
     free(temp_column);
 
     for (int i = 0; i < m.nCols - 1; i++) {
-        int minIndex = i;
+        int min_index = i;
         for (int j = i + 1; j < m.nCols; j++) {
-            if (criteriaValues[j] < criteriaValues[minIndex]) {
-                minIndex = j;
+            if (criteria_values[j] < criteria_values[min_index]) {
+                min_index = j;
             }
         }
 
-        if (minIndex != i) {
-            swapColumns(m, i, minIndex);
-            int temp = criteriaValues[i];
-            criteriaValues[i] = criteriaValues[minIndex];
-            criteriaValues[minIndex] = temp;
+        if (min_index != i) {
+            swapColumns(m, i, min_index);
+            int temp = criteria_values[i];
+            criteria_values[i] = criteria_values[min_index];
+            criteria_values[min_index] = temp;
         }
     }
 
-    free(criteriaValues);
+    free(criteria_values);
 }
 
 bool isSquareMatrix(matrix *m) { 
@@ -195,13 +201,16 @@ bool isSymmetricMatrix(matrix *m) {
             }
         }
     }
+
     return true;
 }
 
 void transposeSquareMatrix(matrix *m) {
     for (int i = 0; i < m->nRows; i++) {
         for (int j = i + 1; j < m->nCols; j++) {
-            swapRows(*m, i, j);
+            int temp = m->values[i][j];
+            m->values[i][j] = m->values[j][i];
+            m->values[j][i] = temp;
         }
     }
 }
@@ -211,9 +220,11 @@ void transposeMatrix(matrix *m) {
     m->nRows = m->nCols;
     m->nCols = temp;
 
-    for (int i = 0; i < m->nCols; i++) {
-        for (int j = i + 1; j < m->nRows; j++) {
-            swapColumns(*m, i, j);
+    for (int i = 0; i < m->nRows; i++) {
+        for (int j = i + 1; j < m->nCols; j++) {
+            int temp = m->values[i][j];
+            m->values[i][j] = m->values[j][i];
+            m->values[j][i] = temp;
         }
     }
 }
