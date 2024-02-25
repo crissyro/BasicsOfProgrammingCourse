@@ -165,8 +165,24 @@ bool isSquareMatrix(matrix *m) {
     return m->nRows == m->nCols; 
 }
 
+// bool areTwoMatricesEqual(matrix *m1, matrix *m2) {
+//     return memcmp(m1->values, m2->values, m1->nRows * m1->nCols * sizeof(int)) == 0;
+// }
+
 bool areTwoMatricesEqual(matrix *m1, matrix *m2) {
-    return memcmp(m1->values, m2->values, m1->nRows * m1->nCols * sizeof(int)) == 0;
+    if (m1->nRows != m2->nRows || m1->nCols != m2->nCols) {
+        return false;
+    }
+
+    for (int i = 0; i < m1->nRows; i++) {
+        for (int j = 0; j < m1->nCols; j++) {
+            if (m1->values[i][j] != m2->values[i][j]) {
+                return false;
+            }
+        }
+    }
+
+    return true;
 }
 
 bool isEMatrix(matrix *m) {
