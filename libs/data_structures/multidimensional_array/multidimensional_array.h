@@ -45,4 +45,7 @@ int max(int a, int b) ;
 // Находит сумму максимальных элементов всех псевдодиагоналей данной матрицы
 long long findSumOfMaxesOfPseudoDiagonal(matrix m) ;
 
+// Найти минимальный элемент матрицы в выделенной области
+int getMinInArea(matrix m) ;
+
 #endif
