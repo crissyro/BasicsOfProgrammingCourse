@@ -4,33 +4,6 @@
 #include "libs/data_structures/matrix/matrix.c"
 // #include "libs/data_structures/multidimensional_array/multidimensional_array.c"
 
-void swapMinMaxRows(matrix m) {
-    position min_position = getMinValuePos(m);
-    position max_position = getMaxValuePos(m);
-
-    swapRows(m, min_position.rowIndex, max_position.rowIndex);
-}
-
-int getMax(int *a, int n) {
-    int max = a[0];
-    for (int i = 1; i < n; i++) {
-        if (a[i] > max) {
-            max = a[i];
-        }
-    }
-    
-    return max;
-}
-
-void sortRowsByMaxElement(matrix m) {
-    for (int i = 0; i < m.nRows - 1; i++) {
-        for (int j = 0; j < m.nRows - i - 1; j++) {
-            if (getMax(m.values[j], m.nCols) > getMax(m.values[j + 1], m.nCols)) {
-                swapRows(m, j, j + 1);
-            }
-        }
-    }
-}
 
 void test_swapMinMaxRows() {
     matrix m1 = createMatrixFromArray(
@@ -96,9 +69,48 @@ void test_sortRowsByMaxElement() {
     freeMemMatrix(&m3);
 }
 
+void test_sortColsByMinElement() {
+    matrix m1 = createMatrixFromArray(
+        (int[]) {
+            3, 5, 2, 4, 3, 3,
+            2, 5, 1, 8, 2, 7,
+            6, 1, 4, 4, 8, 3,
+        },
+        3, 6
+    );
+
+    sortColsByMinElement(m1);
+
+    matrix m2 = createMatrixFromArray(
+        (int[]) {
+            5, 2, 3, 3, 3, 4,
+            5, 1, 2, 2, 7, 8,
+            1, 4, 6, 8, 3, 4,
+        },
+        3, 6
+    );
+
+    matrix m3 = createMatrixFromArray(
+        (int[]) {
+            3, 5, 2, 4, 3, 3,
+            2, 5, 1, 8, 2, 7,
+            6, 1, 4, 4, 8, 3,
+        },
+        3, 6
+    );
+
+    assert(areTwoMatricesEqual(&m1, &m2) == true);
+    assert(areTwoMatricesEqual(&m1, &m3) == false);
+
+    freeMemMatrix(&m1);
+    freeMemMatrix(&m2);
+    freeMemMatrix(&m3);
+}
+
 void test() {
     test_swapMinMaxRows() ;
     test_sortRowsByMaxElement() ;
+    test_sortColsByMinElement() ;
 }
 
 int main() {
