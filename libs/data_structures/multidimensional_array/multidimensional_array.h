@@ -2,17 +2,8 @@
 #define INC_MULTIDIMENSIONAL_ARRAY_H
 
 #include <stdio.h>
-
-typedef struct matrix {
-    int **values; // элементы матрицы
-    int nRows; // количество рядов
-    int nCols; // количество столбцов
-} matrix;
-
-typedef struct position {
-    int rowIndex;
-    int colIndex;
-} position;
+// #include "/../../../libs/data_structures/matrix/matrix.c"
+#include "C:/Users/fatee/ClionProjects/course/libs/data_structures/matrix/matrix.c"
 
 // Дана квадратная матрица, все элементы которой различны.
 // Функция менять местами строки, в которых находятся максимальный и минимальный элементы.
@@ -44,5 +35,8 @@ long long getSum(int *a, int n) ;
 
 // Выполняет проверки сумм строк и вызывает транспонирование, если все суммы строк различны
 void transposeIfMatrixHasNotEqualSumOfRows(matrix m) ;
+
+// Проверяет, являются ли две квадратные матрицы взаимно обратными
+bool isMutuallyInverseMatrices(matrix m1, matrix m2) ;
 
 #endif

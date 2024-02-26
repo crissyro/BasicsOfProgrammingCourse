@@ -2,7 +2,6 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include "multidimensional_array.h"
-#include "libs/data_structures/matrix/matrix.h"
 
 void swapMinMaxRows(matrix m) {
     position min_position = getMinValuePos(m);
@@ -129,4 +128,25 @@ void transposeIfMatrixHasNotEqualSumOfRows(matrix m) {
     if (isUnique(sum, m.nRows)) {
         transposeMatrix(&m);
     }
+}
+
+bool isMutuallyInverseMatrices(matrix m1, matrix m2) {
+    if ((m1.nCols != m2.nCols) || (m1.nRows != m2.nRows)){
+        return false;
+    }
+
+    matrix result = mulMatrices(m1, m2);
+
+    for (int i = 0; i < m1.nRows; i++) {
+        for (int j = 0; j < m1.nCols; j++) {
+            if ((i == j && result.values[i][j] != 1) || (i != j && result.values[i][j] != 0)) {
+                freeMemMatrix(&result);
+                return false;
+            }
+        }
+    }
+
+    freeMemMatrix(&result);
+
+    return true;
 }

@@ -1,9 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <assert.h>
-// #include "fatee/ClionProjects/course/libs/data_structures/matrix/matrix.c"
-#include "libs/data_structures/multidimensional_array/multidimensional_array.c"
-
+#include "C:/Users/fatee/ClionProjects/course/libs/data_structures/multidimensional_array/multidimensional_array.c"
 
 void test_swapMinMaxRows() {
     matrix m1 = createMatrixFromArray(
@@ -193,10 +191,33 @@ void test_transposeIfMatrixHasNotEqualSumOfRows() {
 
     transposeIfMatrixHasNotEqualSumOfRows(input_matrix);
 
-    assert(areTwoMatricesEqual(&input_matrix, &expected_result) == false);
+    assert(areTwoMatricesEqual(&input_matrix, &expected_result) == true);
 
     freeMemMatrix(&input_matrix);
     freeMemMatrix(&expected_result);
+}
+
+void test_isMutuallyInverseMatrices() {
+    matrix m1 = createMatrixFromArray(
+        (int[]) {
+            1, 2,
+            3, 4
+        },
+        2, 2
+    );
+
+    matrix m2 = createMatrixFromArray(
+        (int[]) {
+            1, 2,
+            3, 5
+        },
+        2, 2
+    );
+
+    assert(isMutuallyInverseMatrices(m1, m2) == false);
+
+    freeMemMatrix(&m1);
+    freeMemMatrix(&m2);
 }
 
 void test() {
@@ -206,6 +227,7 @@ void test() {
     test_mulMatrices() ;
     test_getSquareOfMatrixIfSymmetric() ;
     test_transposeIfMatrixHasNotEqualSumOfRows() ;
+    test_isMutuallyInverseMatrices() ;
 }
 
 int main() {
