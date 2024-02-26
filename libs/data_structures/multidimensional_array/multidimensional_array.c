@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include "multidimensional_array.h"
-#include "libs/data_structures/matrix/matrix.c"
+#include "libs/data_structures/matrix/matrix.h"
 
 void swapMinMaxRows(matrix m) {
     position min_position = getMinValuePos(m);
@@ -96,5 +96,37 @@ void getSquareOfMatrixIfSymmetric(matrix *m) {
         matrix squared = mulMatrices(*m, *m);
         freeMemMatrix(m);
         *m = squared;
+    }
+}
+
+bool isUnique(long long *a, int n) {
+    for (int i = 0; i < n; i++) {
+        for (int j = i + 1; j < n; j++) {
+            if (a[i] == a[j]) {
+                return false; 
+            }
+        }
+    }
+
+    return true;
+}
+
+long long getSum(int *a, int n) {
+    long long sum = 0;
+    for (int i = 0; i < n; i++) {
+        sum += a[i];
+    }
+    
+    return sum;
+}
+
+void transposeIfMatrixHasNotEqualSumOfRows(matrix m) {
+    long long sum[m.nRows];
+    for (int i = 0; i < m.nRows; i++) {
+        sum[i] = getSum(m.values[i], m.nCols);
+    }
+
+    if (isUnique(sum, m.nRows)) {
+        transposeMatrix(&m);
     }
 }

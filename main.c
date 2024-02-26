@@ -1,8 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <assert.h>
-#include "libs/data_structures/matrix/matrix.c"
-// #include "libs/data_structures/multidimensional_array/multidimensional_array.c"
+// #include "fatee/ClionProjects/course/libs/data_structures/matrix/matrix.c"
+#include "libs/data_structures/multidimensional_array/multidimensional_array.c"
 
 
 void test_swapMinMaxRows() {
@@ -172,12 +172,40 @@ void test_getSquareOfMatrixIfSymmetric() {
     freeMemMatrix(&expected_result);
 }
 
+void test_transposeIfMatrixHasNotEqualSumOfRows() {
+    matrix input_matrix = createMatrixFromArray(
+        (int[]) {
+            1, 2, 3,
+            4, 5, 6,
+            7, 8, 9
+        },
+        3, 3
+    );
+
+    matrix expected_result = createMatrixFromArray(
+        (int[]) {
+            1, 4, 7,
+            2, 5, 8,
+            3, 6, 9
+        },
+        3, 3
+    );
+
+    transposeIfMatrixHasNotEqualSumOfRows(input_matrix);
+
+    assert(areTwoMatricesEqual(&input_matrix, &expected_result) == false);
+
+    freeMemMatrix(&input_matrix);
+    freeMemMatrix(&expected_result);
+}
+
 void test() {
     test_swapMinMaxRows() ;
     test_sortRowsByMaxElement() ;
     test_sortColsByMinElement() ;
     test_mulMatrices() ;
     test_getSquareOfMatrixIfSymmetric() ;
+    test_transposeIfMatrixHasNotEqualSumOfRows() ;
 }
 
 int main() {

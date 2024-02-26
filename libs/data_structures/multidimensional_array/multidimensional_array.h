@@ -36,4 +36,13 @@ matrix mulMatrices(matrix m1, matrix m2) ;
 // Проверяет, является ли матрица симметричной, и в случае положительного результата заменять ее квадратом
 void getSquareOfMatrixIfSymmetric(matrix *m) ;
 
+// Проверяет, все ли элементы в массиве уникальны
+bool isUnique(long long *a, int n) ;
+
+// Возвращает сумму элементов в массиве
+long long getSum(int *a, int n) ;
+
+// Выполняет проверки сумм строк и вызывает транспонирование, если все суммы строк различны
+void transposeIfMatrixHasNotEqualSumOfRows(matrix m) ;
+
 #endif
