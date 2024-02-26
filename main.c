@@ -107,10 +107,77 @@ void test_sortColsByMinElement() {
     freeMemMatrix(&m3);
 }
 
+void test_mulMatrices() {
+    matrix m1 = createMatrixFromArray(
+        (int[]) {
+            1, 2, 3,
+            4, 5, 6,
+            7, 8, 9
+        },
+        3, 3
+    );
+
+    matrix m2 = createMatrixFromArray(
+        (int[]) {
+            9, 8, 7,
+            6, 5, 4,
+            3, 2, 1
+        },
+        3, 3
+    );
+
+    matrix expected_result = createMatrixFromArray(
+        (int[]) {
+            30, 24, 18,
+            84, 69, 54,
+            138, 114, 90
+        },
+        3, 3
+    );
+
+    matrix result = mulMatrices(m1, m2);
+
+    assert(areTwoMatricesEqual(&result, &expected_result) == true);
+
+    freeMemMatrix(&m1);
+    freeMemMatrix(&m2);
+    freeMemMatrix(&result);
+    freeMemMatrix(&expected_result);
+}
+
+void test_getSquareOfMatrixIfSymmetric() {
+    matrix symmetric_matrix = createMatrixFromArray(
+        (int[]) {
+            1, 2, 3,
+            2, 4, 5,
+            3, 5, 6
+        },
+        3, 3
+    );
+
+    matrix expected_result = createMatrixFromArray(
+        (int[]) {
+            14, 25, 31,
+            25, 45, 56,
+            31, 56, 70
+        },
+        3, 3
+    );
+
+    getSquareOfMatrixIfSymmetric(&symmetric_matrix);
+
+    assert(areTwoMatricesEqual(&symmetric_matrix, &expected_result) == true);
+
+    freeMemMatrix(&symmetric_matrix);
+    freeMemMatrix(&expected_result);
+}
+
 void test() {
     test_swapMinMaxRows() ;
     test_sortRowsByMaxElement() ;
     test_sortColsByMinElement() ;
+    test_mulMatrices() ;
+    test_getSquareOfMatrixIfSymmetric() ;
 }
 
 int main() {
