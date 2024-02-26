@@ -39,4 +39,10 @@ void transposeIfMatrixHasNotEqualSumOfRows(matrix m) ;
 // Проверяет, являются ли две квадратные матрицы взаимно обратными
 bool isMutuallyInverseMatrices(matrix m1, matrix m2) ;
 
+// Находит максимальное значение из a и b
+int max(int a, int b) ;
+
+// Находит сумму максимальных элементов всех псевдодиагоналей данной матрицы
+long long findSumOfMaxesOfPseudoDiagonal(matrix m) ;
+
 #endif
