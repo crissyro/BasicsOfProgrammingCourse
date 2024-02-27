@@ -259,6 +259,25 @@ void test_getMinInArea() {
     freeMemMatrix(&m);
 }
 
+void test_insertionSortRowsMatrixByRowCriteriaF() {
+    matrix input_matrix = createMatrixFromArray(
+        (int[]) {
+            9, 8, 7,
+            6, 5, 4,
+            3, 2, 1
+        },
+        3, 3
+    );
+
+    insertionSortRowsMatrixByRowCriteriaF(input_matrix, getDistance);
+
+    for (int i = 1; i < input_matrix.nRows; i++) {
+        assert(getDistance(input_matrix.values[i - 1], input_matrix.nCols) <= getDistance(input_matrix.values[i], input_matrix.nCols));
+    }
+
+    freeMemMatrix(&input_matrix );
+}
+
 void test() {
     test_swapMinMaxRows() ;
     test_sortRowsByMaxElement() ;
@@ -269,6 +288,7 @@ void test() {
     test_isMutuallyInverseMatrices() ;
     test_findSumOfMaxesOfPseudoDiagonal() ;
     test_getMinInArea() ;
+    test_insertionSortRowsMatrixByRowCriteriaF() ;
 }
 
 int main() {

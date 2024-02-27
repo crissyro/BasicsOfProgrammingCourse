@@ -48,4 +48,13 @@ long long findSumOfMaxesOfPseudoDiagonal(matrix m) ;
 // Найти минимальный элемент матрицы в выделенной области
 int getMinInArea(matrix m) ;
 
+// Вычисляет расстояние до начала координат для одной точки в m-мерном пространстве
+float getDistance(int *a, int n) ;
+
+// Cортировка строк матрицы по заданному критерию
+void insertionSortRowsMatrixByRowCriteriaF(matrix m, float (*criteria)(int *, int)) ;
+
+// Сортировка точек в матрице по их расстояниям до начала координат
+void sortByDistances(matrix m) ;
+
 #endif
