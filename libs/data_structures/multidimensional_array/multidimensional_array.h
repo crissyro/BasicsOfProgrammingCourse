@@ -77,4 +77,13 @@ position getLeftMin(matrix m) ;
 // в котором находится минимальный элемент матрицы
 void swapPenultimateRow(matrix m, int n) ;
 
+// Проверяет, отсортирован ли каждый ряд в матрице по неубыванию
+bool isNonDescendingSorted(int *a, int n) ;
+
+// Проверяет, что все строки матрицы упорядочены по неубыванию
+bool hasAllNonDescendingRows(matrix m) ;
+
+// Считает количество матриц в массиве, в которых все строки упорядочены по неубыванию
+int countNonDescendingRowsMatrices(matrix *ms, int nMatrix) ;
+
 #endif
