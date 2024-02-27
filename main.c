@@ -278,6 +278,26 @@ void test_insertionSortRowsMatrixByRowCriteriaF() {
     freeMemMatrix(&input_matrix );
 }
 
+void test_countEqClassesByRowsSum() {
+    matrix input_matrix = createMatrixFromArray(
+        (int[]) {
+            7, 1, 
+            2, 7,
+            5, 4,
+            4, 3,
+            1, 6,
+            8, 0
+        },
+        6, 2
+    );
+
+    int classes = countEqClassesByRowsSum(input_matrix);
+
+    assert(classes == 3);
+
+    freeMemMatrix(&input_matrix);
+}
+
 void test() {
     test_swapMinMaxRows() ;
     test_sortRowsByMaxElement() ;
@@ -289,6 +309,7 @@ void test() {
     test_findSumOfMaxesOfPseudoDiagonal() ;
     test_getMinInArea() ;
     test_insertionSortRowsMatrixByRowCriteriaF() ;
+    test_countEqClassesByRowsSum() ;
 }
 
 int main() {
