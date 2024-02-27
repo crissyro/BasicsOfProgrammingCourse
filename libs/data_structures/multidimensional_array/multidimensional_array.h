@@ -70,4 +70,11 @@ int countEqClassesByRowsSum(matrix m) ;
 // если он больше суммы остальных элементов своего столбца
 int getNSpecialElement(matrix m) ;
 
+// Ищет позицию первого минимального значения
+position getLeftMin(matrix m) ;
+
+// Заменяет предпоследнюю строку матрицы первым из столбцов, 
+// в котором находится минимальный элемент матрицы
+void swapPenultimateRow(matrix m, int n) ;
+
 #endif
