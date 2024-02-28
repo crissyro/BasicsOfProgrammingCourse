@@ -95,4 +95,10 @@ int countZeroRows(matrix m) ;
 // Выводит матрицы с наибольшим количеством строк, содержащих нули
 void printMatrixWithMaxZeroRows(matrix *ms, int nMatrix) ;
 
+// Вычисляет норму матрицы
+int matrixNorm(matrix m) ;
+
+// Выводит матрицы с наименьшей нормой
+void outputMatricesWithMinNorm(matrix *ms, int nMatrices) ;
+
 #endif

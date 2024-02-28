@@ -393,8 +393,39 @@ void printMatrixWithMaxZeroRows(matrix *ms, int nMatrix) {
 
                 printf("\n");
             }
-            
+
             printf("\n");
+        }
+    }
+}
+
+int matrixNorm(matrix m) {
+    int absolute_max = 0;
+    for (int i = 0; i < m.nRows; i++) {
+        for (int j = 0; j < m.nCols; j++) {
+            int abs_value = abs(m.values[i][j]);
+            if (abs_value > absolute_max) {
+                absolute_max = abs_value;
+            }
+        }
+    }
+
+    return absolute_max;
+}
+
+void outputMatricesWithMinNorm(matrix *ms, int nMatrices) {
+    int min_norm = matrixNorm(ms[0]);
+
+    for (int i = 1; i < nMatrices; i++) {
+        int norm = matrixNorm(ms[i]);
+        if (norm < min_norm) {
+            min_norm = norm;
+        }
+    }
+
+    for (int i = 0; i < nMatrices; i++) {
+        if (matrixNorm(ms[i]) == min_norm) {
+            outputMatrix(ms[i]);
         }
     }
 }
