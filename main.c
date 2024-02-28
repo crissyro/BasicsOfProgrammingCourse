@@ -380,6 +380,42 @@ void test_countNonDescendingRowsMatrices() {
     freeMemMatrix(&m3);
 }
 
+void test_countZeroRows() {
+    matrix m1 = createMatrixFromArray(
+        (int[]) {
+            1, 6,
+            2, 2
+        },
+        2, 2
+    );
+
+    matrix m2 = createMatrixFromArray(
+        (int[]) {
+            0, 0,
+            2, 3
+        },
+        2, 2
+    );
+
+    matrix m3 = createMatrixFromArray(
+        (int[]) {
+            0, 0,
+            0, 0,
+        },
+        2, 2
+    );
+
+    matrix a[] = {m1, m2, m3};
+
+    assert(countZeroRows(a[0]) == 0);
+    assert(countZeroRows(a[1]) == 1); 
+    assert(countZeroRows(a[2]) == 2);
+
+    freeMemMatrix(&m1);
+    freeMemMatrix(&m2);
+    freeMemMatrix(&m3);
+}
+
 void test() {
     test_swapMinMaxRows() ;
     test_sortRowsByMaxElement() ;
@@ -395,6 +431,7 @@ void test() {
     test_getNSpecialElement() ;
     test_swapPenultimateRow() ;
     test_countNonDescendingRowsMatrices() ;
+    test_countZeroRows() ;
 }
 
 int main() {
