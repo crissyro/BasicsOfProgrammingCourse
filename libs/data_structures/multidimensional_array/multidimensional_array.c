@@ -429,3 +429,39 @@ void outputMatricesWithMinNorm(matrix *ms, int nMatrices) {
         }
     }
 }
+
+int min2(int a, int b) {
+    return (a < b) ? a : b;
+}
+
+int getNSpecialElement2(matrix m) {
+    int k = 0;
+
+    for (int i = 0; i < m.nRows; i++) {
+        for (int j = 0; j < m.nCols; j++) {
+            int current_element = m.values[i][j];
+
+            int left_check = 1;
+            for (int k = 0; k < j; k++) {
+                if (m.values[i][k] == current_element ||  min2(current_element, m.values[i][k]) == current_element) {
+                    left_check = 0;
+                    break;
+                }
+            }
+
+            int right_check = 1;
+            for (int k = j + 1; k < m.nCols; k++) {
+                if (m.values[i][k] == current_element ||  min2(current_element, m.values[i][k]) == m.values[i][k]) {
+                    right_check = 0;
+                    break;
+                }
+            }
+
+            if (left_check && right_check) {
+                k++;
+            }
+        }
+    }
+
+    return k;
+}
