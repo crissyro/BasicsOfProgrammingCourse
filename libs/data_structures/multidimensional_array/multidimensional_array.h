@@ -109,4 +109,16 @@ int min2(int a, int b) ;
 // меньшие элементы, а справа – только бoльшие
 int getNSpecialElement2(matrix m) ;
 
+// Вычисляет скалярное произведение векторов a и b
+double getScalarProduct(int *a, int *b, int n) ;
+
+// Вычисляет длину вектора a
+double getVectorLength(int *a, int n) ;
+
+// Вычисляет косинус угла между векторами a и b
+double getCosine(int *a, int *b, int n) ;
+
+// Определяет индекс вектора с максимальным углом относительно вектора b
+int getVectorIndexWithMaxAngle(matrix m, int *b) ;
+
 #endif
