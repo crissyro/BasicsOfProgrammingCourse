@@ -121,4 +121,11 @@ double getCosine(int *a, int *b, int n) ;
 // Определяет индекс вектора с максимальным углом относительно вектора b
 int getVectorIndexWithMaxAngle(matrix m, int *b) ;
 
+// Вычисляет скалярное произведение строки с индексом i и столбца с индексом j в заданной матрице m
+long long getScalarProductRowAndCol(matrix m, int i, int j) ;
+
+// Вычисляет скалярное произведение строки с наибольшим элементом матрицы
+// и столбца с наименьшим элементом матрицы
+long long getSpecialScalarProduct(matrix m, int n) ;
+
 #endif
