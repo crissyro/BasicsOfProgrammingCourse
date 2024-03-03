@@ -181,7 +181,7 @@ bool areTwoMatricesEqual(matrix *m1, matrix *m2) {
             }
         }
     }
-
+    
     return true;
 }
 

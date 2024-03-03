@@ -101,19 +101,49 @@ libs/algorithms/CMakeFiles/algorithms.dir/array/array.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/algorithms.dir/array/array.c.s"
 	cd /d C:\Users\fatee\CLionProjects\course\cmake-build-debug\libs\algorithms && C:\PROGRA~2\MINGW-~1\I686-8~1.0-P\mingw32\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Users\fatee\CLionProjects\course\libs\algorithms\array\array.c -o CMakeFiles\algorithms.dir\array\array.c.s
 
+libs/algorithms/CMakeFiles/algorithms.dir/unordered_array/unordered_array.c.obj: libs/algorithms/CMakeFiles/algorithms.dir/flags.make
+libs/algorithms/CMakeFiles/algorithms.dir/unordered_array/unordered_array.c.obj: ../libs/algorithms/unordered_array/unordered_array.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\fatee\CLionProjects\course\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building C object libs/algorithms/CMakeFiles/algorithms.dir/unordered_array/unordered_array.c.obj"
+	cd /d C:\Users\fatee\CLionProjects\course\cmake-build-debug\libs\algorithms && C:\PROGRA~2\MINGW-~1\I686-8~1.0-P\mingw32\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles\algorithms.dir\unordered_array\unordered_array.c.obj -c C:\Users\fatee\CLionProjects\course\libs\algorithms\unordered_array\unordered_array.c
+
+libs/algorithms/CMakeFiles/algorithms.dir/unordered_array/unordered_array.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/algorithms.dir/unordered_array/unordered_array.c.i"
+	cd /d C:\Users\fatee\CLionProjects\course\cmake-build-debug\libs\algorithms && C:\PROGRA~2\MINGW-~1\I686-8~1.0-P\mingw32\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Users\fatee\CLionProjects\course\libs\algorithms\unordered_array\unordered_array.c > CMakeFiles\algorithms.dir\unordered_array\unordered_array.c.i
+
+libs/algorithms/CMakeFiles/algorithms.dir/unordered_array/unordered_array.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/algorithms.dir/unordered_array/unordered_array.c.s"
+	cd /d C:\Users\fatee\CLionProjects\course\cmake-build-debug\libs\algorithms && C:\PROGRA~2\MINGW-~1\I686-8~1.0-P\mingw32\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Users\fatee\CLionProjects\course\libs\algorithms\unordered_array\unordered_array.c -o CMakeFiles\algorithms.dir\unordered_array\unordered_array.c.s
+
+libs/algorithms/CMakeFiles/algorithms.dir/ordered_array/ordered_array.c.obj: libs/algorithms/CMakeFiles/algorithms.dir/flags.make
+libs/algorithms/CMakeFiles/algorithms.dir/ordered_array/ordered_array.c.obj: ../libs/algorithms/ordered_array/ordered_array.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\fatee\CLionProjects\course\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building C object libs/algorithms/CMakeFiles/algorithms.dir/ordered_array/ordered_array.c.obj"
+	cd /d C:\Users\fatee\CLionProjects\course\cmake-build-debug\libs\algorithms && C:\PROGRA~2\MINGW-~1\I686-8~1.0-P\mingw32\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles\algorithms.dir\ordered_array\ordered_array.c.obj -c C:\Users\fatee\CLionProjects\course\libs\algorithms\ordered_array\ordered_array.c
+
+libs/algorithms/CMakeFiles/algorithms.dir/ordered_array/ordered_array.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/algorithms.dir/ordered_array/ordered_array.c.i"
+	cd /d C:\Users\fatee\CLionProjects\course\cmake-build-debug\libs\algorithms && C:\PROGRA~2\MINGW-~1\I686-8~1.0-P\mingw32\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E C:\Users\fatee\CLionProjects\course\libs\algorithms\ordered_array\ordered_array.c > CMakeFiles\algorithms.dir\ordered_array\ordered_array.c.i
+
+libs/algorithms/CMakeFiles/algorithms.dir/ordered_array/ordered_array.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/algorithms.dir/ordered_array/ordered_array.c.s"
+	cd /d C:\Users\fatee\CLionProjects\course\cmake-build-debug\libs\algorithms && C:\PROGRA~2\MINGW-~1\I686-8~1.0-P\mingw32\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S C:\Users\fatee\CLionProjects\course\libs\algorithms\ordered_array\ordered_array.c -o CMakeFiles\algorithms.dir\ordered_array\ordered_array.c.s
+
 # Object files for target algorithms
 algorithms_OBJECTS = \
 "CMakeFiles/algorithms.dir/algorithm.c.obj" \
-"CMakeFiles/algorithms.dir/array/array.c.obj"
+"CMakeFiles/algorithms.dir/array/array.c.obj" \
+"CMakeFiles/algorithms.dir/unordered_array/unordered_array.c.obj" \
+"CMakeFiles/algorithms.dir/ordered_array/ordered_array.c.obj"
 
 # External object files for target algorithms
 algorithms_EXTERNAL_OBJECTS =
 
 libs/algorithms/libalgorithms.a: libs/algorithms/CMakeFiles/algorithms.dir/algorithm.c.obj
 libs/algorithms/libalgorithms.a: libs/algorithms/CMakeFiles/algorithms.dir/array/array.c.obj
+libs/algorithms/libalgorithms.a: libs/algorithms/CMakeFiles/algorithms.dir/unordered_array/unordered_array.c.obj
+libs/algorithms/libalgorithms.a: libs/algorithms/CMakeFiles/algorithms.dir/ordered_array/ordered_array.c.obj
 libs/algorithms/libalgorithms.a: libs/algorithms/CMakeFiles/algorithms.dir/build.make
 libs/algorithms/libalgorithms.a: libs/algorithms/CMakeFiles/algorithms.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=C:\Users\fatee\CLionProjects\course\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Linking C static library libalgorithms.a"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=C:\Users\fatee\CLionProjects\course\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Linking C static library libalgorithms.a"
 	cd /d C:\Users\fatee\CLionProjects\course\cmake-build-debug\libs\algorithms && $(CMAKE_COMMAND) -P CMakeFiles\algorithms.dir\cmake_clean_target.cmake
 	cd /d C:\Users\fatee\CLionProjects\course\cmake-build-debug\libs\algorithms && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles\algorithms.dir\link.txt --verbose=$(VERBOSE)
 

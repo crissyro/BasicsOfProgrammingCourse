@@ -15,6 +15,7 @@ set(CMAKE_C_TARGET_INCLUDE_PATH
 # Targets to which this target links.
 set(CMAKE_TARGET_LINKED_INFO_FILES
   "C:/Users/fatee/CLionProjects/course/cmake-build-debug/libs/data_structures/CMakeFiles/data_structures.dir/DependInfo.cmake"
+  "C:/Users/fatee/CLionProjects/course/cmake-build-debug/libs/algorithms/CMakeFiles/algorithms.dir/DependInfo.cmake"
   )
 
 # Fortran module output directory.

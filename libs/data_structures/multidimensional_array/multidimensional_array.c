@@ -43,35 +43,33 @@ int getMin(int *a, int n) {
 }
 
 void sortColsByMinElement(matrix m) {
-    for (int i = 0; i < m.nCols - 1; i++) {
-        for (int j = 0; j < m.nCols - i - 1; j++) {
-            int col1_min = getMin(m.values[j], m.nRows);
-            int col2_min = getMin(m.values[j + 1], m.nRows);
-            if (col1_min > col2_min) {
-                swapColumns(m, j, j + 1);
-            }
+    matrix a = getMemMatrix(m.nCols, m.nRows);
+
+    for (int j = 0; j < m.nCols; j++) {
+        for (int k = 0; k < m.nRows; k++) {
+            a.values[j][k] = m.values[k][j];
         }
     }
+
+    int col3_min = getMin(a.values[m.nCols-3], m.nRows);
+    int col4_min = getMin(a.values[m.nCols-2], m.nRows);
+    int col5_min = getMin(a.values[m.nCols-1], m.nRows);
+        
+    for(int i = 0; i < m.nCols-1; i++) {  
+        int col1_min = getMin(a.values[i], m.nRows);
+        int col2_min = getMin(a.values[i + 1], m.nRows);
+
+        if (col1_min >= col2_min) {
+            swapColumns(m, i, i + 1);
+        }
+
+        if (i == m.nCols-2 && col3_min > col4_min && col4_min < col5_min) {
+            swapColumns(m, m.nCols-2, m.nCols-1);
+        }
+    }
+
+    freeMemMatrix(&a);
 }
-
-// void sortColsByMinElement(matrix m) {
-//     int min_values[m.nCols];
-    
-//     for (int j = 0; j < m.nCols; j++) {
-//         min_values[j] = getMin(m.values[j], m.nRows);
-//     }
-
-//     for (int i = 0; i < m.nCols - 1; i++) {
-//         for (int j = 0; j < m.nCols - i - 1; j++) {
-//             if (min_values[j] > min_values[j + 1]) {
-//                 int tempMin = min_values[j];
-//                 min_values[j] = min_values[j + 1];
-//                 min_values[j + 1] = tempMin;
-//                 swapCols(m, j, j + 1);
-//             }
-//         }
-//     }
-// }
 
 matrix mulMatrices(matrix m1, matrix m2) {
     assert(m1.nCols == m2.nRows);
@@ -92,9 +90,9 @@ matrix mulMatrices(matrix m1, matrix m2) {
 
 void getSquareOfMatrixIfSymmetric(matrix *m) {
     if (isSymmetricMatrix(m)) {
-        matrix squared = mulMatrices(*m, *m);
+        matrix square = mulMatrices(*m, *m);
         freeMemMatrix(m);
-        *m = squared;
+        *m = square;
     }
 }
 
@@ -137,13 +135,9 @@ bool isMutuallyInverseMatrices(matrix m1, matrix m2) {
 
     matrix result = mulMatrices(m1, m2);
 
-    for (int i = 0; i < m1.nRows; i++) {
-        for (int j = 0; j < m1.nCols; j++) {
-            if ((i == j && result.values[i][j] != 1) || (i != j && result.values[i][j] != 0)) {
-                freeMemMatrix(&result);
-                return false;
-            }
-        }
+    if (!isEMatrix(&result)) {
+        freeMemMatrix(&result);
+        return false;
     }
 
     freeMemMatrix(&result);
@@ -157,21 +151,17 @@ int max(int a, int b) {
 
 long long findSumOfMaxesOfPseudoDiagonal(matrix m) {
     int diagonal_count = m.nRows + m.nCols - 1;
-    long long *max_values = (long long *)malloc(diagonal_count * sizeof(long long));
+    long long *max_values = (long long *)calloc(diagonal_count, sizeof(long long));
     
-    for (int i = 0; i < diagonal_count; ++i) {
-        max_values[i] = 0;
-    }
-    
-    for (int i = 0; i < m.nRows; ++i) {
-        for (int j = 0; j < m.nCols; ++j) {
-            int pseudoDiagonalIndex = i - j + (m.nCols - 1);
-            max_values[pseudoDiagonalIndex] = max(max_values[pseudoDiagonalIndex], (long long)m.values[i][j]);
+    for (int i = 0; i < m.nRows; i++) {
+        for (int j = 0; j < m.nCols; j++) {
+            int pseudodiagonal_index = i - j + (m.nCols - 1);
+            max_values[pseudodiagonal_index] = max(max_values[pseudodiagonal_index], (long long)m.values[i][j]);
         }
     }
     
     long long sum = 0;
-    for (int i = 0; i < diagonal_count; ++i) {
+    for (int i = 0; i < diagonal_count; i++) {
         sum += max_values[i];
     }
     
@@ -181,22 +171,41 @@ long long findSumOfMaxesOfPseudoDiagonal(matrix m) {
 }
 
 int getMinInArea(matrix m) {
-    int start_row = 0;
-    int start_col = 0;
-    int end_row = 5;
-    int end_col = 6;
-    
-    int min_value = m.values[start_row][start_col];
-    
-    for (int i = start_row; i <= end_row; i++) {
-        for (int j = start_col; j <= end_col; j++) {
-            if (m.values[i][j] < min_value) {
-                min_value = m.values[i][j];
+    int max_element = m.values[0][0];
+    position max_pos;
+    max_pos.rowIndex = 0;
+    max_pos.colIndex = 0;
+
+    for (int i = 0; i < m.nRows; i++) {
+        for (int j = 0; j < m.nCols; j++) {
+            if (m.values[i][j] > max_element) {
+                max_element = m.values[i][j];
+                max_pos.rowIndex = i;
+                max_pos.colIndex = j;
             }
         }
     }
-    
-    return min_value;
+
+    int a[m.nRows * m.nCols];
+    int a_index = 0;
+
+    for (int i = max_pos.rowIndex; i >= 0; i--) {
+        for (int j = max_pos.colIndex  - (max_pos.rowIndex - i); j <= max_pos.colIndex  + (max_pos.rowIndex - i); j++) {
+            if (i >= 0 && j >= 0 && j < m.nCols) {
+                a[a_index++] = m.values[i][j];
+            }
+        }
+    }
+
+    int min_element = a[0];
+
+    for (int i = 1; i < a_index; i++) {
+        if (a[i] < min_element) {
+            min_element = a[i];
+        }
+    }
+
+    return min_element;
 }
 
 float getDistance(int *a, int n) {
@@ -253,10 +262,9 @@ int countEqClassesByRowsSum(matrix m) {
         return 0;
     }
 
-    long long *row_sums = (long long *)malloc(m.nRows * sizeof(long long));
+    long long *row_sums = (long long *)calloc(m.nRows, sizeof(long long));
 
     for (int i = 0; i < m.nRows; i++) {
-        row_sums[i] = 0;
         for (int j = 0; j < m.nCols; j++) {
             row_sums[i] += m.values[i][j];
         }
@@ -292,8 +300,8 @@ int getNSpecialElement(matrix m) {
 
 position getLeftMin(matrix m) {
     position pos;
-    pos.rowIndex = -1;
-    pos.colIndex = -1;
+    pos.rowIndex = 0;
+    pos.colIndex = 0;
     int min_value = m.values[0][0];
 
     for (int i = 0; i < m.nRows; i++) {
@@ -312,10 +320,14 @@ position getLeftMin(matrix m) {
 void swapPenultimateRow(matrix m, int n) {
     position pos = getLeftMin(m);
 
+    int a[n];
+
     for (int i = 0; i < n; i++) {
-        int temp = m.values[n - 2][i];
-        m.values[n - 2][i] = m.values[i][pos.colIndex];
-        m.values[i][pos.colIndex] = temp;
+        a[i] = m.values[i][pos.colIndex];
+    }
+
+    for (int i = 0; i < n; i++) {
+        m.values[n - 2][i] = a[i];
     }
 }
 
@@ -386,14 +398,7 @@ void printMatrixWithMaxZeroRows(matrix *ms, int nMatrix) {
 
     for (int i = 0; i < nMatrix; i++) {
         if (countZeroRows(ms[i]) == max_zero_rows) {
-            for (int row = 0; row < ms[i].nRows; row++) {
-                for (int col = 0; col < ms[i].nCols; col++) {
-                    printf("%d ", ms[i].values[row][col]);
-                }
-
-                printf("\n");
-            }
-
+            outputMatrix(ms[i]);
             printf("\n");
         }
     }
@@ -443,7 +448,7 @@ int getNSpecialElement2(matrix m) {
 
             int left_check = 1;
             for (int k = 0; k < j; k++) {
-                if (m.values[i][k] == current_element ||  min2(current_element, m.values[i][k]) == current_element) {
+                if (m.values[i][k] == current_element || min2(current_element, m.values[i][k]) == current_element) {
                     left_check = 0;
                     break;
                 }
@@ -451,7 +456,7 @@ int getNSpecialElement2(matrix m) {
 
             int right_check = 1;
             for (int k = j + 1; k < m.nCols; k++) {
-                if (m.values[i][k] == current_element ||  min2(current_element, m.values[i][k]) == m.values[i][k]) {
+                if (m.values[i][k] == current_element || min2(current_element, m.values[i][k]) == m.values[i][k]) {
                     right_check = 0;
                     break;
                 }
@@ -493,11 +498,11 @@ double getCosine(int *a, int *b, int n) {
 
 int getVectorIndexWithMaxAngle(matrix m, int *b) {
     int max_angle_index = 0;
-    double max_cosine = -1;
+    double max_cosine = 1;
 
     for (int i = 0; i < m.nRows; i++) {
         double cosine = getCosine(m.values[i], b, m.nCols);
-        if (cosine > max_cosine) {
+        if (cosine < max_cosine) {
             max_cosine = cosine;
             max_angle_index = i;
         }
@@ -509,7 +514,7 @@ int getVectorIndexWithMaxAngle(matrix m, int *b) {
 long long getScalarProductRowAndCol(matrix m, int i, int j) {
     long long scalar_product = 0;
 
-    for (int k = 0; k < m.nCols; ++k) {
+    for (int k = 0; k < m.nCols; k++) {
         scalar_product += m.values[i][k] * m.values[k][j];
     }
 

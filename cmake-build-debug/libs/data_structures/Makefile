@@ -170,6 +170,114 @@ bitset/bitset.c.s:
 	cd /d C:\Users\fatee\CLionProjects\course\cmake-build-debug && $(MAKE) $(MAKESILENT) -f libs\data_structures\CMakeFiles\data_structures.dir\build.make libs/data_structures/CMakeFiles/data_structures.dir/bitset/bitset.c.s
 .PHONY : bitset/bitset.c.s
 
+matrix/matrix.obj: matrix/matrix.c.obj
+
+.PHONY : matrix/matrix.obj
+
+# target to build an object file
+matrix/matrix.c.obj:
+	cd /d C:\Users\fatee\CLionProjects\course\cmake-build-debug && $(MAKE) $(MAKESILENT) -f libs\data_structures\CMakeFiles\data_structures.dir\build.make libs/data_structures/CMakeFiles/data_structures.dir/matrix/matrix.c.obj
+.PHONY : matrix/matrix.c.obj
+
+matrix/matrix.i: matrix/matrix.c.i
+
+.PHONY : matrix/matrix.i
+
+# target to preprocess a source file
+matrix/matrix.c.i:
+	cd /d C:\Users\fatee\CLionProjects\course\cmake-build-debug && $(MAKE) $(MAKESILENT) -f libs\data_structures\CMakeFiles\data_structures.dir\build.make libs/data_structures/CMakeFiles/data_structures.dir/matrix/matrix.c.i
+.PHONY : matrix/matrix.c.i
+
+matrix/matrix.s: matrix/matrix.c.s
+
+.PHONY : matrix/matrix.s
+
+# target to generate assembly for a file
+matrix/matrix.c.s:
+	cd /d C:\Users\fatee\CLionProjects\course\cmake-build-debug && $(MAKE) $(MAKESILENT) -f libs\data_structures\CMakeFiles\data_structures.dir\build.make libs/data_structures/CMakeFiles/data_structures.dir/matrix/matrix.c.s
+.PHONY : matrix/matrix.c.s
+
+multidimensional_array/multidimensional_array.obj: multidimensional_array/multidimensional_array.c.obj
+
+.PHONY : multidimensional_array/multidimensional_array.obj
+
+# target to build an object file
+multidimensional_array/multidimensional_array.c.obj:
+	cd /d C:\Users\fatee\CLionProjects\course\cmake-build-debug && $(MAKE) $(MAKESILENT) -f libs\data_structures\CMakeFiles\data_structures.dir\build.make libs/data_structures/CMakeFiles/data_structures.dir/multidimensional_array/multidimensional_array.c.obj
+.PHONY : multidimensional_array/multidimensional_array.c.obj
+
+multidimensional_array/multidimensional_array.i: multidimensional_array/multidimensional_array.c.i
+
+.PHONY : multidimensional_array/multidimensional_array.i
+
+# target to preprocess a source file
+multidimensional_array/multidimensional_array.c.i:
+	cd /d C:\Users\fatee\CLionProjects\course\cmake-build-debug && $(MAKE) $(MAKESILENT) -f libs\data_structures\CMakeFiles\data_structures.dir\build.make libs/data_structures/CMakeFiles/data_structures.dir/multidimensional_array/multidimensional_array.c.i
+.PHONY : multidimensional_array/multidimensional_array.c.i
+
+multidimensional_array/multidimensional_array.s: multidimensional_array/multidimensional_array.c.s
+
+.PHONY : multidimensional_array/multidimensional_array.s
+
+# target to generate assembly for a file
+multidimensional_array/multidimensional_array.c.s:
+	cd /d C:\Users\fatee\CLionProjects\course\cmake-build-debug && $(MAKE) $(MAKESILENT) -f libs\data_structures\CMakeFiles\data_structures.dir\build.make libs/data_structures/CMakeFiles/data_structures.dir/multidimensional_array/multidimensional_array.c.s
+.PHONY : multidimensional_array/multidimensional_array.c.s
+
+vector/vector.obj: vector/vector.c.obj
+
+.PHONY : vector/vector.obj
+
+# target to build an object file
+vector/vector.c.obj:
+	cd /d C:\Users\fatee\CLionProjects\course\cmake-build-debug && $(MAKE) $(MAKESILENT) -f libs\data_structures\CMakeFiles\data_structures.dir\build.make libs/data_structures/CMakeFiles/data_structures.dir/vector/vector.c.obj
+.PHONY : vector/vector.c.obj
+
+vector/vector.i: vector/vector.c.i
+
+.PHONY : vector/vector.i
+
+# target to preprocess a source file
+vector/vector.c.i:
+	cd /d C:\Users\fatee\CLionProjects\course\cmake-build-debug && $(MAKE) $(MAKESILENT) -f libs\data_structures\CMakeFiles\data_structures.dir\build.make libs/data_structures/CMakeFiles/data_structures.dir/vector/vector.c.i
+.PHONY : vector/vector.c.i
+
+vector/vector.s: vector/vector.c.s
+
+.PHONY : vector/vector.s
+
+# target to generate assembly for a file
+vector/vector.c.s:
+	cd /d C:\Users\fatee\CLionProjects\course\cmake-build-debug && $(MAKE) $(MAKESILENT) -f libs\data_structures\CMakeFiles\data_structures.dir\build.make libs/data_structures/CMakeFiles/data_structures.dir/vector/vector.c.s
+.PHONY : vector/vector.c.s
+
+vector/vectorVoid.obj: vector/vectorVoid.c.obj
+
+.PHONY : vector/vectorVoid.obj
+
+# target to build an object file
+vector/vectorVoid.c.obj:
+	cd /d C:\Users\fatee\CLionProjects\course\cmake-build-debug && $(MAKE) $(MAKESILENT) -f libs\data_structures\CMakeFiles\data_structures.dir\build.make libs/data_structures/CMakeFiles/data_structures.dir/vector/vectorVoid.c.obj
+.PHONY : vector/vectorVoid.c.obj
+
+vector/vectorVoid.i: vector/vectorVoid.c.i
+
+.PHONY : vector/vectorVoid.i
+
+# target to preprocess a source file
+vector/vectorVoid.c.i:
+	cd /d C:\Users\fatee\CLionProjects\course\cmake-build-debug && $(MAKE) $(MAKESILENT) -f libs\data_structures\CMakeFiles\data_structures.dir\build.make libs/data_structures/CMakeFiles/data_structures.dir/vector/vectorVoid.c.i
+.PHONY : vector/vectorVoid.c.i
+
+vector/vectorVoid.s: vector/vectorVoid.c.s
+
+.PHONY : vector/vectorVoid.s
+
+# target to generate assembly for a file
+vector/vectorVoid.c.s:
+	cd /d C:\Users\fatee\CLionProjects\course\cmake-build-debug && $(MAKE) $(MAKESILENT) -f libs\data_structures\CMakeFiles\data_structures.dir\build.make libs/data_structures/CMakeFiles/data_structures.dir/vector/vectorVoid.c.s
+.PHONY : vector/vectorVoid.c.s
+
 # Help Target
 help:
 	@echo The following are some of the valid targets for this Makefile:
@@ -182,6 +290,18 @@ help:
 	@echo ... bitset/bitset.obj
 	@echo ... bitset/bitset.i
 	@echo ... bitset/bitset.s
+	@echo ... matrix/matrix.obj
+	@echo ... matrix/matrix.i
+	@echo ... matrix/matrix.s
+	@echo ... multidimensional_array/multidimensional_array.obj
+	@echo ... multidimensional_array/multidimensional_array.i
+	@echo ... multidimensional_array/multidimensional_array.s
+	@echo ... vector/vector.obj
+	@echo ... vector/vector.i
+	@echo ... vector/vector.s
+	@echo ... vector/vectorVoid.obj
+	@echo ... vector/vectorVoid.i
+	@echo ... vector/vectorVoid.s
 .PHONY : help
 
 

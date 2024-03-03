@@ -158,10 +158,46 @@
 		<Unit filename="C:/Users/fatee/CLionProjects/course/libs/algorithms/array/array.h">
 			<Option target="algorithms"/>
 		</Unit>
+		<Unit filename="C:/Users/fatee/CLionProjects/course/libs/algorithms/ordered_array/ordered_array.c">
+			<Option target="algorithms"/>
+		</Unit>
+		<Unit filename="C:/Users/fatee/CLionProjects/course/libs/algorithms/ordered_array/ordered_array.h">
+			<Option target="algorithms"/>
+		</Unit>
+		<Unit filename="C:/Users/fatee/CLionProjects/course/libs/algorithms/unordered_array/unordered_array.c">
+			<Option target="algorithms"/>
+		</Unit>
+		<Unit filename="C:/Users/fatee/CLionProjects/course/libs/algorithms/unordered_array/unordered_array.h">
+			<Option target="algorithms"/>
+		</Unit>
 		<Unit filename="C:/Users/fatee/CLionProjects/course/libs/data_structures/bitset/bitset.c">
 			<Option target="data_structures"/>
 		</Unit>
 		<Unit filename="C:/Users/fatee/CLionProjects/course/libs/data_structures/bitset/bitset.h">
+			<Option target="data_structures"/>
+		</Unit>
+		<Unit filename="C:/Users/fatee/CLionProjects/course/libs/data_structures/matrix/matrix.c">
+			<Option target="data_structures"/>
+		</Unit>
+		<Unit filename="C:/Users/fatee/CLionProjects/course/libs/data_structures/matrix/matrix.h">
+			<Option target="data_structures"/>
+		</Unit>
+		<Unit filename="C:/Users/fatee/CLionProjects/course/libs/data_structures/multidimensional_array/multidimensional_array.c">
+			<Option target="data_structures"/>
+		</Unit>
+		<Unit filename="C:/Users/fatee/CLionProjects/course/libs/data_structures/multidimensional_array/multidimensional_array.h">
+			<Option target="data_structures"/>
+		</Unit>
+		<Unit filename="C:/Users/fatee/CLionProjects/course/libs/data_structures/vector/vector.c">
+			<Option target="data_structures"/>
+		</Unit>
+		<Unit filename="C:/Users/fatee/CLionProjects/course/libs/data_structures/vector/vector.h">
+			<Option target="data_structures"/>
+		</Unit>
+		<Unit filename="C:/Users/fatee/CLionProjects/course/libs/data_structures/vector/vectorVoid.c">
+			<Option target="data_structures"/>
+		</Unit>
+		<Unit filename="C:/Users/fatee/CLionProjects/course/libs/data_structures/vector/vectorVoid.h">
 			<Option target="data_structures"/>
 		</Unit>
 		<Unit filename="C:/Users/fatee/CLionProjects/course/main.c">

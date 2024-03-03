@@ -149,14 +149,15 @@ libs/data_structures/clean: libs/data_structures/CMakeFiles/data_structures.dir/
 
 # All Build rule for target.
 CMakeFiles/course.dir/all: libs/data_structures/CMakeFiles/data_structures.dir/all
+CMakeFiles/course.dir/all: libs/algorithms/CMakeFiles/algorithms.dir/all
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\course.dir\build.make CMakeFiles/course.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\course.dir\build.make CMakeFiles/course.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=C:\Users\fatee\CLionProjects\course\cmake-build-debug\CMakeFiles --progress-num=4,5 "Built target course"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=C:\Users\fatee\CLionProjects\course\cmake-build-debug\CMakeFiles --progress-num=6,7 "Built target course"
 .PHONY : CMakeFiles/course.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/course.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\fatee\CLionProjects\course\cmake-build-debug\CMakeFiles 4
+	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\fatee\CLionProjects\course\cmake-build-debug\CMakeFiles 13
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 CMakeFiles/course.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\fatee\CLionProjects\course\cmake-build-debug\CMakeFiles 0
 .PHONY : CMakeFiles/course.dir/rule
@@ -175,15 +176,15 @@ CMakeFiles/course.dir/clean:
 # Target rules for target libs/data_structures/CMakeFiles/data_structures.dir
 
 # All Build rule for target.
-libs/data_structures/CMakeFiles/data_structures.dir/all:
+libs/data_structures/CMakeFiles/data_structures.dir/all: libs/algorithms/CMakeFiles/algorithms.dir/all
 	$(MAKE) $(MAKESILENT) -f libs\data_structures\CMakeFiles\data_structures.dir\build.make libs/data_structures/CMakeFiles/data_structures.dir/depend
 	$(MAKE) $(MAKESILENT) -f libs\data_structures\CMakeFiles\data_structures.dir\build.make libs/data_structures/CMakeFiles/data_structures.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=C:\Users\fatee\CLionProjects\course\cmake-build-debug\CMakeFiles --progress-num=6,7 "Built target data_structures"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=C:\Users\fatee\CLionProjects\course\cmake-build-debug\CMakeFiles --progress-num=8,9,10,11,12,13 "Built target data_structures"
 .PHONY : libs/data_structures/CMakeFiles/data_structures.dir/all
 
 # Build rule for subdir invocation for target.
 libs/data_structures/CMakeFiles/data_structures.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\fatee\CLionProjects\course\cmake-build-debug\CMakeFiles 2
+	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\fatee\CLionProjects\course\cmake-build-debug\CMakeFiles 11
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 libs/data_structures/CMakeFiles/data_structures.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\fatee\CLionProjects\course\cmake-build-debug\CMakeFiles 0
 .PHONY : libs/data_structures/CMakeFiles/data_structures.dir/rule
@@ -205,12 +206,12 @@ libs/data_structures/CMakeFiles/data_structures.dir/clean:
 libs/algorithms/CMakeFiles/algorithms.dir/all:
 	$(MAKE) $(MAKESILENT) -f libs\algorithms\CMakeFiles\algorithms.dir\build.make libs/algorithms/CMakeFiles/algorithms.dir/depend
 	$(MAKE) $(MAKESILENT) -f libs\algorithms\CMakeFiles\algorithms.dir\build.make libs/algorithms/CMakeFiles/algorithms.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=C:\Users\fatee\CLionProjects\course\cmake-build-debug\CMakeFiles --progress-num=1,2,3 "Built target algorithms"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=C:\Users\fatee\CLionProjects\course\cmake-build-debug\CMakeFiles --progress-num=1,2,3,4,5 "Built target algorithms"
 .PHONY : libs/algorithms/CMakeFiles/algorithms.dir/all
 
 # Build rule for subdir invocation for target.
 libs/algorithms/CMakeFiles/algorithms.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\fatee\CLionProjects\course\cmake-build-debug\CMakeFiles 3
+	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\fatee\CLionProjects\course\cmake-build-debug\CMakeFiles 5
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 libs/algorithms/CMakeFiles/algorithms.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\fatee\CLionProjects\course\cmake-build-debug\CMakeFiles 0
 .PHONY : libs/algorithms/CMakeFiles/algorithms.dir/rule

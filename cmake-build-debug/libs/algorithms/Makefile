@@ -197,6 +197,60 @@ array/array.c.s:
 	cd /d C:\Users\fatee\CLionProjects\course\cmake-build-debug && $(MAKE) $(MAKESILENT) -f libs\algorithms\CMakeFiles\algorithms.dir\build.make libs/algorithms/CMakeFiles/algorithms.dir/array/array.c.s
 .PHONY : array/array.c.s
 
+ordered_array/ordered_array.obj: ordered_array/ordered_array.c.obj
+
+.PHONY : ordered_array/ordered_array.obj
+
+# target to build an object file
+ordered_array/ordered_array.c.obj:
+	cd /d C:\Users\fatee\CLionProjects\course\cmake-build-debug && $(MAKE) $(MAKESILENT) -f libs\algorithms\CMakeFiles\algorithms.dir\build.make libs/algorithms/CMakeFiles/algorithms.dir/ordered_array/ordered_array.c.obj
+.PHONY : ordered_array/ordered_array.c.obj
+
+ordered_array/ordered_array.i: ordered_array/ordered_array.c.i
+
+.PHONY : ordered_array/ordered_array.i
+
+# target to preprocess a source file
+ordered_array/ordered_array.c.i:
+	cd /d C:\Users\fatee\CLionProjects\course\cmake-build-debug && $(MAKE) $(MAKESILENT) -f libs\algorithms\CMakeFiles\algorithms.dir\build.make libs/algorithms/CMakeFiles/algorithms.dir/ordered_array/ordered_array.c.i
+.PHONY : ordered_array/ordered_array.c.i
+
+ordered_array/ordered_array.s: ordered_array/ordered_array.c.s
+
+.PHONY : ordered_array/ordered_array.s
+
+# target to generate assembly for a file
+ordered_array/ordered_array.c.s:
+	cd /d C:\Users\fatee\CLionProjects\course\cmake-build-debug && $(MAKE) $(MAKESILENT) -f libs\algorithms\CMakeFiles\algorithms.dir\build.make libs/algorithms/CMakeFiles/algorithms.dir/ordered_array/ordered_array.c.s
+.PHONY : ordered_array/ordered_array.c.s
+
+unordered_array/unordered_array.obj: unordered_array/unordered_array.c.obj
+
+.PHONY : unordered_array/unordered_array.obj
+
+# target to build an object file
+unordered_array/unordered_array.c.obj:
+	cd /d C:\Users\fatee\CLionProjects\course\cmake-build-debug && $(MAKE) $(MAKESILENT) -f libs\algorithms\CMakeFiles\algorithms.dir\build.make libs/algorithms/CMakeFiles/algorithms.dir/unordered_array/unordered_array.c.obj
+.PHONY : unordered_array/unordered_array.c.obj
+
+unordered_array/unordered_array.i: unordered_array/unordered_array.c.i
+
+.PHONY : unordered_array/unordered_array.i
+
+# target to preprocess a source file
+unordered_array/unordered_array.c.i:
+	cd /d C:\Users\fatee\CLionProjects\course\cmake-build-debug && $(MAKE) $(MAKESILENT) -f libs\algorithms\CMakeFiles\algorithms.dir\build.make libs/algorithms/CMakeFiles/algorithms.dir/unordered_array/unordered_array.c.i
+.PHONY : unordered_array/unordered_array.c.i
+
+unordered_array/unordered_array.s: unordered_array/unordered_array.c.s
+
+.PHONY : unordered_array/unordered_array.s
+
+# target to generate assembly for a file
+unordered_array/unordered_array.c.s:
+	cd /d C:\Users\fatee\CLionProjects\course\cmake-build-debug && $(MAKE) $(MAKESILENT) -f libs\algorithms\CMakeFiles\algorithms.dir\build.make libs/algorithms/CMakeFiles/algorithms.dir/unordered_array/unordered_array.c.s
+.PHONY : unordered_array/unordered_array.c.s
+
 # Help Target
 help:
 	@echo The following are some of the valid targets for this Makefile:
@@ -212,6 +266,12 @@ help:
 	@echo ... array/array.obj
 	@echo ... array/array.i
 	@echo ... array/array.s
+	@echo ... ordered_array/ordered_array.obj
+	@echo ... ordered_array/ordered_array.i
+	@echo ... ordered_array/ordered_array.s
+	@echo ... unordered_array/unordered_array.obj
+	@echo ... unordered_array/unordered_array.i
+	@echo ... unordered_array/unordered_array.s
 .PHONY : help
 
 
