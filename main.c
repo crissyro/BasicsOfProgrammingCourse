@@ -3,29 +3,49 @@
 #include <assert.h>
 #include "C:/Users/fatee/ClionProjects/course/libs/data_structures/multidimensional_array/multidimensional_array.c"
 
-void test_getMinInArea() {
-    matrix m = createMatrixFromArray(
+void test_sortColsByMinElement() {
+    matrix m1 = createMatrixFromArray(
         (int[]) {
-            3, 2, 5, 4, 9, 9,
-            7, 3, 6, 6, 9, 9,
-            3, 7, 5, 7, 9, 9,
-            3, 2, 5, 6, 9, 9,
-            1, 3, 6, 12, 9, 9,
+            3, 5, 2, 4, 3, 3,
+            2, 5, 1, 8, 2, 7,
+            6, 1, 4, 4, 8, 3,
         },
-        5, 6
+        3, 6
     );
-    
-    int expected_result = 2; 
-    
-    int result = getMinInArea(m);
 
-    assert(result == expected_result);
+    sortColsByMinElement(m1);
 
-    freeMemMatrix(&m);
+    outputMatrix(m1);
+
+
+    matrix m2 = createMatrixFromArray(
+        (int[]) {
+            5, 2, 3, 3, 3, 4,
+            5, 1, 2, 2, 7, 8,
+            1, 4, 6, 8, 3, 4,
+        },
+        3, 6
+    );
+
+    matrix m3 = createMatrixFromArray(
+        (int[]) {
+            3, 5, 2, 4, 3, 3,
+            2, 5, 1, 8, 2, 7,
+            6, 1, 4, 4, 8, 3,
+        },
+        3, 6
+    );
+
+    assert(areTwoMatricesEqual(&m1, &m2) == true);
+    assert(areTwoMatricesEqual(&m1, &m3) == false);
+
+    freeMemMatrix(&m1);
+    freeMemMatrix(&m2);
+    freeMemMatrix(&m3);
 }
 
 void test() {
-    test_getMinInArea() ;
+    test_sortColsByMinElement() ;
 }
 
 int main() {

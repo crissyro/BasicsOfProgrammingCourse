@@ -50,21 +50,13 @@ void sortColsByMinElement(matrix m) {
             a.values[j][k] = m.values[k][j];
         }
     }
-
-    int col3_min = getMin(a.values[m.nCols-3], m.nRows);
-    int col4_min = getMin(a.values[m.nCols-2], m.nRows);
-    int col5_min = getMin(a.values[m.nCols-1], m.nRows);
         
     for(int i = 0; i < m.nCols-1; i++) {  
         int col1_min = getMin(a.values[i], m.nRows);
         int col2_min = getMin(a.values[i + 1], m.nRows);
 
-        if (col1_min >= col2_min) {
+        if ((col1_min >= col2_min) || (i == m.nCols-2 && col1_min < col2_min)) {
             swapColumns(m, i, i + 1);
-        }
-
-        if (i == m.nCols-2 && col3_min > col4_min && col4_min < col5_min) {
-            swapColumns(m, m.nCols-2, m.nCols-1);
         }
     }
 
