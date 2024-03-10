@@ -1,21 +1,23 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <assert.h>
+#include <ctype.h>
 #include "C:/Users/fatee/ClionProjects/course/libs/string_/string_.c"
 
-void test_findNonSpaceReverse() {
+void test_findSpaceReverse() {
     const char text1[] = "   \t  Hello, World!";
     char *rbegin1 = (char*)(text1 + sizeof(text1) - 2); 
     const char *rend1 = text1 - 1;
+    
+    char *result1 = findSpaceReverse(rbegin1, rend1);
+    printf("%s\n", result1);
+    assert(*result1 == ' ');
 
-    char *result1 = findNonSpaceReverse(rbegin1, rend1);
-    assert(*result1 == '!');
-
-    const char text2[] = "   \t  ";
+    const char text2[] = "ThisHasNoSpace";
     char *rbegin2 = (char*)(text2 + sizeof(text2) - 2); 
     const char *rend2 = text2 - 1;
 
-    char *result2 = findNonSpaceReverse(rbegin2, rend2);
+    char *result2 = findSpaceReverse(rbegin2, rend2);
     assert(result2 == rend2);
 }
 
@@ -24,7 +26,8 @@ void test() {
     // test_find() ;
     // test_findNonSpace() ;
     // test_findSpace() ;
-    test_findNonSpaceReverse() ;
+    // test_findNonSpaceReverse() ;
+    test_findSpaceReverse() ;
 }
 
 int main() {

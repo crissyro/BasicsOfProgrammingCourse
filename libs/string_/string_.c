@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <ctype.h>
 #include "srting_.h"
 
 size_t strlen1(char *s) {
@@ -56,6 +57,18 @@ char* findSpace(char *begin) {
 
 char* findNonSpaceReverse(char *rbegin, const char *rend) {
     while (rbegin >= rend && isspace(*rbegin)) {
+        rbegin--;
+    }
+
+    return rbegin;
+}
+
+char* findSpaceReverse(char *rbegin, const char *rend) {
+    while (rbegin > rend) {
+        if (isspace(*rbegin)) {
+            return rbegin;
+        }
+
         rbegin--;
     }
 
