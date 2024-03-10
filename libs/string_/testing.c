@@ -69,3 +69,20 @@ void test_findNonSpaceReverse() {
     char *result2 = findNonSpaceReverse(rbegin2, rend2);
     assert(result2 == rend2);
 }
+
+void test_findSpaceReverse() {
+    const char text1[] = "   \t  Hello, World!";
+    char *rbegin1 = (char*)(text1 + sizeof(text1) - 2); 
+    const char *rend1 = text1 - 1;
+    
+    char *result1 = findSpaceReverse(rbegin1, rend1);
+    printf("%s\n", result1);
+    assert(*result1 == ' ');
+
+    const char text2[] = "ThisHasNoSpace";
+    char *rbegin2 = (char*)(text2 + sizeof(text2) - 2); 
+    const char *rend2 = text2 - 1;
+
+    char *result2 = findSpaceReverse(rbegin2, rend2);
+    assert(result2 == rend2);
+}
