@@ -45,3 +45,11 @@ char* findNonSpace(char *begin) {
 
     return begin;
 }
+
+char* findSpace(char *begin) {
+    while (*begin != ' ' && *begin != '\0') {
+        begin++;
+    }
+
+    return begin;
+}

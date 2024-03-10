@@ -3,32 +3,25 @@
 #include <assert.h>
 #include "C:/Users/fatee/ClionProjects/course/libs/string_/string_.c"
 
-void test_find() {
-    char str[] = "Hello, world!";
-    char *begin = str;
-    char *end = str + sizeof(str) - 1;
+void test_findSpace() {
+    char text1[] = "Hello, World!";
+    char text2[] = "ThisHasNoSpace";
+    char text3[] = "";
 
-    char ch1 = 'o';
-    char *result1 = find(begin, end, ch1);
-    printf("%s\n", result1);
+    char *result1 = findSpace(text1);
+    char *result2 = findSpace(text2);
+    char *result3 = findSpace(text3);
 
-    char ch2 = 'y';
-    char *result2 = find(begin, end, ch2);
-    assert(result2 == end);
-}
-
-void test_findNonSpace() {
-    char text[] = "   \t  Hello, World!";
-
-    char *nonSpacePtr = findNonSpace(text);
-
-    printf("%s\n", nonSpacePtr);
+    assert(*result1 == ' ');
+    assert(*result2 == '\0');
+    assert(*result3 == '\0');
 }
 
 void test() {
     // test_strlen() ;
     // test_find() ;
-    test_findNonSpace() ;
+    // test_findNonSpace() ;
+    test_findSpace() ;
 }
 
 int main() {
