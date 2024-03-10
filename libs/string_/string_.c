@@ -11,7 +11,6 @@ size_t strlen1(char *s) {
     return i;
 }
 
-
 size_t strlen2(char *s) {
     int i = 0;
     while (*s != '\0') {
@@ -100,8 +99,22 @@ char* copyIf(char *beginSource, const char *endSource, char *beginDestination, i
             *beginDestination = *beginSource;
             beginDestination++;
         }
+
         beginSource++;
     }
 
+    return beginDestination;
+}
+
+char* copyIfReverse(char *rbeginSource, const char *rendSource, char *beginDestination, int (*f)(int)) {
+    while (rbeginSource >= rendSource) {
+        if (f(*rbeginSource)) {
+            *beginDestination = *rbeginSource;
+            beginDestination++;
+        }
+
+        rbeginSource--;
+    }
+    
     return beginDestination;
 }

@@ -8,14 +8,13 @@ int isEven(int num) {
     return num % 2 == 0;
 }
 
-void test_copyIf() {
+void test_copyIfReverse() {
     char source1[] = {1, 2, 3, 4, 5};
     char destination1[5];
-    char *result1 = copyIf(source1, source1 + 5, destination1, isEven);
+    copyIfReverse(source1 + 4, source1 - 1, destination1, isEven);
 
-    assert(result1 - destination1 == 2);
-    assert(destination1[0] == 2);
-    assert(destination1[1] == 4);
+    assert(destination1[0] == 4);
+    assert(destination1[1] == 2);
 }
 
 void test() {
@@ -27,7 +26,8 @@ void test() {
     // test_findSpaceReverse() ; 
     // test_strcmp() ;
     // test_copy() ;
-    test_copyIf() ;
+    // test_copyIf() ;
+    test_copyIfReverse() ;
 }
 
 int main() {

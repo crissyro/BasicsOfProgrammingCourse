@@ -105,3 +105,17 @@ void test_copy() {
 
     assert(strcmp(destination, "Hello") == 0);
 }
+
+int isEven(int num) {
+    return num % 2 == 0;
+}
+
+void test_copyIf() {
+    char source1[] = {1, 2, 3, 4, 5};
+    char destination1[5];
+    char *result1 = copyIf(source1, source1 + 5, destination1, isEven);
+
+    assert(result1 - destination1 == 2);
+    assert(destination1[0] == 2);
+    assert(destination1[1] == 4);
+}
