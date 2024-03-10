@@ -4,12 +4,15 @@
 #include <ctype.h>
 #include "C:/Users/fatee/ClionProjects/course/libs/string_/string_.c"
 
-void test_strcmp() {
-    assert(strcmp("hello", "hello") == 0);
-    assert(strcmp("hello", "world") < 0);
-    assert(strcmp("apple", "app") > 0);
-    assert(strcmp("", "hello") < 0);
-    assert(strcmp("world", "") > 0);
+void test_copy() {
+    const char source[] = "Hello";
+    char destination[10];
+    copy(source, source + 5, destination);
+
+    destination[5] = '\0';
+    printf("%s", destination);
+
+    assert(strcmp(destination, "Hello") == 0);
 }
 
 void test() {
@@ -19,7 +22,8 @@ void test() {
     // test_findSpace() ;
     // test_findNonSpaceReverse() ;
     // test_findSpaceReverse() ;
-    test_strcmp() ;
+    // test_strcmp() ;
+    test_copy() ;
 }
 
 int main() {

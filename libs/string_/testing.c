@@ -86,3 +86,11 @@ void test_findSpaceReverse() {
     char *result2 = findSpaceReverse(rbegin2, rend2);
     assert(result2 == rend2);
 }
+
+void test_strcmp() {
+    assert(strcmp("hello", "hello") == 0);
+    assert(strcmp("hello", "world") < 0);
+    assert(strcmp("apple", "app") > 0);
+    assert(strcmp("", "hello") < 0);
+    assert(strcmp("world", "") > 0);
+}
