@@ -39,3 +39,16 @@ void test_findNonSpace() {
     printf("%s\n", nonSpacePtr);
 }
 
+void test_findSpace() {
+    char text1[] = "Hello, World!";
+    char text2[] = "ThisHasNoSpace";
+    char text3[] = "";
+
+    char *result1 = findSpace(text1);
+    char *result2 = findSpace(text2);
+    char *result3 = findSpace(text3);
+
+    assert(*result1 == ' ');
+    assert(*result2 == '\0');
+    assert(*result3 == '\0');
+}

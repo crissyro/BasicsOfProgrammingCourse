@@ -3,25 +3,28 @@
 #include <assert.h>
 #include "C:/Users/fatee/ClionProjects/course/libs/string_/string_.c"
 
-void test_findSpace() {
-    char text1[] = "Hello, World!";
-    char text2[] = "ThisHasNoSpace";
-    char text3[] = "";
+void test_findNonSpaceReverse() {
+    const char text1[] = "   \t  Hello, World!";
+    char *rbegin1 = (char*)(text1 + sizeof(text1) - 2); 
+    const char *rend1 = text1 - 1;
 
-    char *result1 = findSpace(text1);
-    char *result2 = findSpace(text2);
-    char *result3 = findSpace(text3);
+    char *result1 = findNonSpaceReverse(rbegin1, rend1);
+    assert(*result1 == '!');
 
-    assert(*result1 == ' ');
-    assert(*result2 == '\0');
-    assert(*result3 == '\0');
+    const char text2[] = "   \t  ";
+    char *rbegin2 = (char*)(text2 + sizeof(text2) - 2); 
+    const char *rend2 = text2 - 1;
+
+    char *result2 = findNonSpaceReverse(rbegin2, rend2);
+    assert(result2 == rend2);
 }
 
 void test() {
     // test_strlen() ;
     // test_find() ;
     // test_findNonSpace() ;
-    test_findSpace() ;
+    // test_findSpace() ;
+    test_findNonSpaceReverse() ;
 }
 
 int main() {
