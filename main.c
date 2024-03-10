@@ -4,15 +4,18 @@
 #include <ctype.h>
 #include "C:/Users/fatee/ClionProjects/course/libs/string_/string_.c"
 
-void test_copy() {
-    const char source[] = "Hello";
-    char destination[10];
-    copy(source, source + 5, destination);
+int isEven(int num) {
+    return num % 2 == 0;
+}
 
-    destination[5] = '\0';
-    printf("%s", destination);
+void test_copyIf() {
+    char source1[] = {1, 2, 3, 4, 5};
+    char destination1[5];
+    char *result1 = copyIf(source1, source1 + 5, destination1, isEven);
 
-    assert(strcmp(destination, "Hello") == 0);
+    assert(result1 - destination1 == 2);
+    assert(destination1[0] == 2);
+    assert(destination1[1] == 4);
 }
 
 void test() {
@@ -21,9 +24,10 @@ void test() {
     // test_findNonSpace() ;
     // test_findSpace() ;
     // test_findNonSpaceReverse() ;
-    // test_findSpaceReverse() ;
+    // test_findSpaceReverse() ; 
     // test_strcmp() ;
-    test_copy() ;
+    // test_copy() ;
+    test_copyIf() ;
 }
 
 int main() {
