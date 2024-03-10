@@ -1,51 +1,34 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <assert.h>
-#include "C:/Users/fatee/ClionProjects/course/libs/data_structures/multidimensional_array/multidimensional_array.c"
+#include "C:/Users/fatee/ClionProjects/course/libs/string_/string_.c"
 
-void test_sortColsByMinElement() {
-    matrix m1 = createMatrixFromArray(
-        (int[]) {
-            3, 5, 2, 4, 3, 3,
-            2, 5, 1, 8, 2, 7,
-            6, 1, 4, 4, 8, 3,
-        },
-        3, 6
-    );
+void test_find() {
+    char str[] = "Hello, world!";
+    char *begin = str;
+    char *end = str + sizeof(str) - 1;
 
-    sortColsByMinElement(m1);
+    char ch1 = 'o';
+    char *result1 = find(begin, end, ch1);
+    printf("%s\n", result1);
 
-    outputMatrix(m1);
+    char ch2 = 'y';
+    char *result2 = find(begin, end, ch2);
+    assert(result2 == end);
+}
 
+void test_findNonSpace() {
+    char text[] = "   \t  Hello, World!";
 
-    matrix m2 = createMatrixFromArray(
-        (int[]) {
-            5, 2, 3, 3, 3, 4,
-            5, 1, 2, 2, 7, 8,
-            1, 4, 6, 8, 3, 4,
-        },
-        3, 6
-    );
+    char *nonSpacePtr = findNonSpace(text);
 
-    matrix m3 = createMatrixFromArray(
-        (int[]) {
-            3, 5, 2, 4, 3, 3,
-            2, 5, 1, 8, 2, 7,
-            6, 1, 4, 4, 8, 3,
-        },
-        3, 6
-    );
-
-    assert(areTwoMatricesEqual(&m1, &m2) == true);
-    assert(areTwoMatricesEqual(&m1, &m3) == false);
-
-    freeMemMatrix(&m1);
-    freeMemMatrix(&m2);
-    freeMemMatrix(&m3);
+    printf("%s\n", nonSpacePtr);
 }
 
 void test() {
-    test_sortColsByMinElement() ;
+    // test_strlen() ;
+    // test_find() ;
+    test_findNonSpace() ;
 }
 
 int main() {

@@ -42,7 +42,7 @@ int strcmp(const char *lhs, const char *rhs) ;
 
 // Записывает по адресу beginDestination фрагмент памяти, 
 // начиная с адреса beginSource до endSource.
-// Возвращает указатель на следующий свободный фрагмент памяти в destination5
+// Возвращает указатель на следующий свободный фрагмент памяти в destination
 char* copy(const char *beginSource, const char *endSource, char *beginDestination) ;
 
 // Записывает по адресу beginDestination элементы из фрагмента памяти 
