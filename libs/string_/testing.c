@@ -43,7 +43,7 @@ void test_findNonSpace() {
 void test_findSpace() {
     char text1[] = "Hello, World!";
     char text2[] = "ThisHasNoSpace";
-    char text3[] = "";
+    char text3[] = "\t   ";
 
     char *result1 = findSpace(text1);
     char *result2 = findSpace(text2);
@@ -51,7 +51,7 @@ void test_findSpace() {
 
     assert(*result1 == ' ');
     assert(*result2 == '\0');
-    assert(*result3 == '\0');
+    assert(*result3 == '\t');
 }
 
 void test_findNonSpaceReverse() {
@@ -118,4 +118,13 @@ void test_copyIf() {
     assert(result1 - destination1 == 2);
     assert(destination1[0] == 2);
     assert(destination1[1] == 4);
+}
+
+void test_copyIfReverse() {
+    char source1[] = {1, 2, 3, 4, 5};
+    char destination1[5];
+    copyIfReverse(source1 + 4, source1 - 1, destination1, isEven);
+
+    assert(destination1[0] == 4);
+    assert(destination1[1] == 2);
 }

@@ -4,17 +4,20 @@
 #include <ctype.h>
 #include "C:/Users/fatee/ClionProjects/course/libs/string_/string_.c"
 
-int isEven(int num) {
-    return num % 2 == 0;
-}
+void test_findNonSpaceReverse() {
+    const char text1[] = "   \t  Hello, World!";
+    char *rbegin1 = (char*)(text1 + sizeof(text1) - 2); 
+    const char *rend1 = text1 - 1;
 
-void test_copyIfReverse() {
-    char source1[] = {1, 2, 3, 4, 5};
-    char destination1[5];
-    copyIfReverse(source1 + 4, source1 - 1, destination1, isEven);
+    char *result1 = findNonSpaceReverse(rbegin1, rend1);
+    assert(*result1 == '!');
 
-    assert(destination1[0] == 4);
-    assert(destination1[1] == 2);
+    const char text2[] = "   \t  ";
+    char *rbegin2 = (char*)(text2 + sizeof(text2) - 2); 
+    const char *rend2 = text2 - 1;
+
+    char *result2 = findNonSpaceReverse(rbegin2, rend2);
+    assert(result2 == rend2);
 }
 
 void test() {
@@ -22,12 +25,12 @@ void test() {
     // test_find() ;
     // test_findNonSpace() ;
     // test_findSpace() ;
-    // test_findNonSpaceReverse() ;
+    test_findNonSpaceReverse() ;
     // test_findSpaceReverse() ; 
     // test_strcmp() ;
     // test_copy() ;
     // test_copyIf() ;
-    test_copyIfReverse() ;
+    // test_copyIfReverse() ;
 }
 
 int main() {
