@@ -3,6 +3,9 @@
 
 #include <stdio.h>
 
+#define MAX_STRING_SIZE
+char _stringBuffer[MAX_STRING_SIZE + 1];
+
 // Возвращает количество символов в строке 
 size_t strlen1(char *s) ;
 

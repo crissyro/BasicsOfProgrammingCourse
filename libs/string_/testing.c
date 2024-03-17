@@ -128,3 +128,22 @@ void test_copyIfReverse() {
     assert(destination1[0] == 4);
     assert(destination1[1] == 2);
 }
+
+void test() {
+    // test_strlen() ;
+    // test_find() ;
+    // test_findNonSpace() ;
+    // test_findSpace() ;
+    // test_findNonSpaceReverse() ;
+    // test_findSpaceReverse() ; 
+    // test_strcmp() ;
+    // test_copy() ;
+    test_copyIf() ;
+    // test_copyIfReverse() ;
+}
+
+int main() {
+    test();
+
+    return 0;
+}

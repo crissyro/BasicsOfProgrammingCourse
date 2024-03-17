@@ -3,34 +3,45 @@
 #include <assert.h>
 #include <ctype.h>
 #include "C:/Users/fatee/ClionProjects/course/libs/string_/string_.c"
+// #include "C:/Users/fatee/ClionProjects/course/libs/string_/tasks/string_processing.c"
 
-void test_findNonSpaceReverse() {
-    const char text1[] = "   \t  Hello, World!";
-    char *rbegin1 = (char*)(text1 + sizeof(text1) - 2); 
-    const char *rend1 = text1 - 1;
+#define ASSERT_STRING(expected, got) assertString(expected, got, __FILE__, __FUNCTION__, __LINE__)
+#define MAX_STRING_SIZE
 
-    char *result1 = findNonSpaceReverse(rbegin1, rend1);
-    assert(*result1 == '!');
+char _stringBuffer[MAX_STRING_SIZE + 1];
 
-    const char text2[] = "   \t  ";
-    char *rbegin2 = (char*)(text2 + sizeof(text2) - 2); 
-    const char *rend2 = text2 - 1;
+typedef struct WordDescriptor {
+    char *begin; // позиция начала слова
+    char *end; // позиция первого символа, после последнего символа слова
+} WordDescriptor;
 
-    char *result2 = findNonSpaceReverse(rbegin2, rend2);
-    assert(result2 == rend2);
+void digitToStart(WordDescriptor word) {
+    char *endStringBuffer = copy(word.begin, word.end, _stringBuffer);
+
+    char *recPosition = copyIfReverse(endStringBuffer - 1, _stringBuffer - 1, word.begin, isdigit);
+
+    copyIf(_stringBuffer, endStringBuffer, recPosition, isalpha);
+}
+
+void assertString(const char *expected, char *got,char const *fileName, char const *funcName, int line) {
+    if (strcmp(expected, got)) {
+        fprintf(stderr, "File %s\n", fileName);
+        fprintf(stderr, "%s - failed on line %d\n", funcName, line);
+        fprintf(stderr, "Expected: \"%s\"\n", expected);
+        fprintf(stderr, "Got: \"%s\"\n\n", got);
+    } else {
+        fprintf(stderr, "%s - OK\n", funcName);
+    }
+}
+
+void test_digitToStartTransform_oneWord() {
+    char s[] = "Hi123 ";
+    digitToStart(s);
+    ASSERT_STRING("321Hi", s);
 }
 
 void test() {
-    // test_strlen() ;
-    // test_find() ;
-    // test_findNonSpace() ;
-    // test_findSpace() ;
-    test_findNonSpaceReverse() ;
-    // test_findSpaceReverse() ; 
-    // test_strcmp() ;
-    // test_copy() ;
-    // test_copyIf() ;
-    // test_copyIfReverse() ;
+    test_digitToStartTransform_oneWord() ;
 }
 
 int main() {

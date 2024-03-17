@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <ctype.h>
-#include "srting_.h"
+#include "string_.h"
 
 size_t strlen1(char *s) {
     int i = 0;
@@ -101,7 +101,7 @@ char* copy(const char *beginSource, const char *endSource, char *beginDestinatio
 }
 
 char* copyIf(char *beginSource, const char *endSource, char *beginDestination, int (*f)(int)) {
-    while (beginSource < endSource) {
+    while (beginSource <= endSource) {
         if (f(*beginSource)) {
             *beginDestination = *beginSource;
             beginDestination++;
