@@ -145,62 +145,65 @@
 #include <stdlib.h>
 #include <string.h>
 #include "C:/Users/fatee/ClionProjects/course/libs/string_/string_.c"
-
-int compare(const void *a, const void *b) {
-    return (*(char *)a - *(char *)b);
-}
-
-int checkSameLettersPair(const char *s) {
-    char *buffer = strdup(s);
-    char *begin = buffer;
-    char *end = buffer + strlen_(buffer);
-    char *wordBegin = findNonSpace(buffer);
-    char *wordEnd = findSpace(wordBegin);
-
-    char **words = NULL;
-    int count = 0;
-
-    while (wordBegin < end) {
-        size_t wordLen = wordEnd - wordBegin;
-        char *word = (char *)malloc(wordLen + 1);
-        copy(wordBegin, wordEnd, word);
-        word[wordLen] = '\0';
-
-        qsort(word, wordLen, sizeof(char), compare);
-
-        for (int i = 0; i < count; i++) {
-            if (strcmp(words[i], word) == 0) {
-                free(buffer);
-                free(word);
-                return 1;
-            }
-        }
-
-        words = (char **)realloc(words, (count + 1) * sizeof(char *));
-        words[count] = word;
-        count++;
-
-        wordBegin = findNonSpace(wordEnd);
-        wordEnd = findSpace(wordBegin);
-    }
-
-    free(buffer);
-    for (int i = 0; i < count; i++) {
-        free(words[i]);
+ 
+#define N 250
+ 
+void getWord(char *str, int *index, char *word) {
+    int j;
+    while (str[*index] <= ' ' && str[*index] != '\0')
+        (*index)++;
+    
+    j = 0;
+    while (str[*index] > ' ' && str[*index] != '\0') {
+        word[j] = str[*index];
+        (*index)++;
+        j++;
     }
     
-    free(words);
-
-    return 0;
+    word[j] = '\0';
 }
-
-int main() {
-    const char s[] = "cat tac silent hello world";
-    if (checkSameLettersPair(s)) {
-        printf("YES\n");
-    } else {
-        printf("Пара слов с одинаковым набором букв не найдена.\n");
+ 
+int compareStrings(char *str1, char *str2) {
+    int i;
+    for (i = 0; str1[i] == str2[i]; i++) {
+        if (str1[i] == '\0')
+            return 0;
     }
-
+    
+    return str1[i] - str2[i];
+}
+ 
+int checkForDuplicateWord(char *str) {
+    int index = 0, flag = 0, j = 0;
+    char word1[N], word2[N];
+    
+    while (str[index] != '\0' && flag == 0) {
+        getWord(str, &index, word1);
+        j = index;
+        
+        while (str[j] != '\0' && flag == 0) {
+            getWord(str, &j, word2);
+            if (compareStrings(word1, word2) == 0) {
+                flag = 1;
+            }
+        }
+    }
+    
+    return flag;
+}
+ 
+int main() {
+    int flag;
+    char input[N];
+    gets(input);
+ 
+    flag = checkForDuplicateWord(input);
+ 
+    printf("flag = %d\n", flag);
+    if (flag == 1)
+        printf("Duplicate word found\n");
+    else
+        printf("No duplicate words found\n");
+    
     return 0;
 }
