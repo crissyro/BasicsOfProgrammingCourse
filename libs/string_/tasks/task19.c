@@ -1,16 +1,8 @@
 #include <stdio.h>
 #include <ctype.h>
+#include "C:/Users/fatee/ClionProjects/course/libs/string_/string_.c"
 
 #define CHAR_SET_SIZE 26
-
-size_t strlen_(const char *begin) {
-    const char *end = begin;
-    while (*end != '\0') {
-        end++;
-    }
-
-    return end - begin;
-}
 
 int allLettersPresent(char *str, char *word) {
     int wordLen = strlen_(word);

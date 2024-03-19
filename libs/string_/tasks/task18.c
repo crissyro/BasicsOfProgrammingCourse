@@ -1,51 +1,40 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include "C:/Users/fatee/ClionProjects/course/libs/string_/string_.c"
 
-void appendWords(char *str1, char *str2) {
-    char *smallerStr;
-    char *largerStr;
+void processStrings(char *s1, char *s2, int n1, int n2) {
+    char *wordArray[100];
+    int wordArrayIndex = 0;
 
-    int n1 = 1;
-    for (int i = 0; i < strlen_(str1); i++) {
-        if (str1[i] == ' ') {
-            n1++;
+    for (char *token = s2; *token; token = findNonSpace(findSpace(token))) {
+        wordArray[wordArrayIndex] = malloc(strlen_(token) + 1);
+        copy(token, findSpace(token), wordArray[wordArrayIndex]);
+        wordArrayIndex++;
+    }
+
+    for (int j = n2 - n1; j > 0; j--) {
+        char *space = " ";
+        char *endS1 = s1 + strlen_(s1);
+        if (endS1 != s1) {
+            copy(space, space + 1, endS1);
+            endS1++;
         }
+        endS1 = copy(wordArray[wordArrayIndex - j], findSpace(wordArray[wordArrayIndex - j]), endS1);
     }
 
-    int n2 = 1;
-    for (int i = 0; i < strlen_(str2); i++) {
-        if (str2[i] == ' ') {
-            n2++;
-        }
-    }
+    printf("Result: %s\n", s1);
 
-    if (n1 <= n2) {
-        smallerStr = str1;
-        largerStr = str2;
-    } else {
-        smallerStr = str2;
-        largerStr = str1;
+    for (int j = 0; j < wordArrayIndex; j++) {
+        free(wordArray[j]);
     }
-
-    char *lastWordsStart = largerStr;
-    for (int i = 0; i < n2 - n1; i++) {
-        lastWordsStart = findSpace(lastWordsStart);
-        if (lastWordsStart == NULL) {
-            break;
-        }
-        lastWordsStart++;
-    }
-
-    copy(lastWordsStart, findNonSpaceReverse(largerStr + strlen_(largerStr), largerStr), smallerStr);
 }
 
 int main() {
-    char str1[] = "The quick brown fox";
-    char str2[] = "jumps over the lazy dog";
+    char s1[100] = "aaa bbb ccc";
+    char s2[100] = "ddd eee fff ggg hhh";
+    int n1 = 3, n2 = 5;
 
-    printf("Before:\nString 1: %s\nString 2: %s\n", str1, str2);
-    appendWords(str1, str2);
-    printf("\nAfter:\nString 1: %s\nString 2: %s\n", str1, str2);
+    processStrings(s1, s2, n1, n2);
 
     return 0;
 }
