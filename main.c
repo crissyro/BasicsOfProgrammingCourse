@@ -50,3 +50,37 @@
 //     return 0;
 // }
 
+// #include <stdio.h>
+// #include <ctype.h>
+// #include "C:/Users/fatee/ClionProjects/course/libs/string_/string_.c"
+// #include <string.h>
+
+// #define MAX_STRING_SIZE 100
+
+// void replace_digits_with_spaces(char *input) {
+//     char buffer[MAX_STRING_SIZE];
+//     strcpy(buffer, input);
+
+//     for (int u = strlen(input) - 1; u >= 0; u--) {
+//         if (isdigit(input[u])) {
+//             for (int y = 0; y < input[u] - '0'; y++) {
+//                 memmove(&buffer[u + 1], &buffer[u], strlen(buffer) - u + 1);
+//                 buffer[u] = ' ';
+//             }
+//         }
+//     }
+
+//     printf("%s\n", buffer);
+// }
+
+// int main() {
+//     char input[MAX_STRING_SIZE];
+
+//     printf("Введите строку: ");
+//     scanf("%s", input);
+
+//     replace_digits_with_spaces(input);
+
+//     return 0;
+// }
+
