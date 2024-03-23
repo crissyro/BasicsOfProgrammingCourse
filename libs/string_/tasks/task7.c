@@ -1,16 +1,5 @@
 #include <stdio.h>
-
-#define MAX_N_WORDS_IN_STRING 100
-
-typedef struct {
-    char *begin;
-    char *end;
-} WordDescriptor;
-
-typedef struct {
-    WordDescriptor words[MAX_N_WORDS_IN_STRING];
-    size_t size;
-} BagOfWords;
+#include "C:/Users/fatee/ClionProjects/course/libs/string_/string_.c"
 
 void getBagOfWords(BagOfWords *bag, char *s) {
     char *p = s;

@@ -1,50 +1,41 @@
 #include <stdio.h>
-#include <ctype.h>
 #include "C:/Users/fatee/ClionProjects/course/libs/string_/string_.c"
 
-void replaceDigitsWithSpaces(char *input) {
-    char buffer[MAX_STRING_SIZE];
-    int buffer_index = 0;
+void replaceDigitsWithSpaces(char *source) {
+    char array_without_numbers[MAX_STRING_SIZE];
+    char *current = source;
+    char *destination = array_without_numbers;
 
-    for (int i = 0; i < strlen_(input); i++) {
-        if (isdigit(input[i])) {
-            int num_spaces = input[i] - '0';
+    while (*current != '\0') {
+        if (isdigit(*current)) {
+            int num_spaces = *current - '0';
             for (int j = 0; j < num_spaces; j++) {
-                buffer[buffer_index++] = ' ';
+                *destination = ' ';
+                destination++;
             }
         } else {
-            buffer[buffer_index++] = input[i];
+            *destination = *current;
+            destination++;
         }
+        current++;
     }
 
-    buffer[buffer_index] = '\0';
+    *destination = '\0';
+    copy2(array_without_numbers, destination, source);
+}
 
-    printf("%s\n", buffer);
+void test_replaceDigitsWithSpaces() {
+    char source[] = "a2b3c1d";
+    replaceDigitsWithSpaces(source);
+    ASSERT_STRING("a  b   c d", source);
+}
+
+void test() {
+    test_replaceDigitsWithSpaces() ;
 }
 
 int main() {
-    char input[MAX_STRING_SIZE];
-
-    printf("Введите строку: ");
-    scanf("%s", input);
-
-    replace_digits_with_spaces(input);
+    test();
 
     return 0;
 }
-
-// void test_replaceDigitsWithSpaces() {
-//     char s[] = "a2b3c1d";
-//     replaceDigitsWithSpaces(s);
-//     ASSERT_STRING("a  b   c d", s);
-// }
-
-// void test() {
-//     test_replaceDigitsWithSpaces() ;
-// }
-
-// int main() {
-//     test();
-
-//     return 0;
-// }

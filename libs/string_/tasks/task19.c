@@ -1,5 +1,4 @@
 #include <stdio.h>
-#include <ctype.h>
 #include "C:/Users/fatee/ClionProjects/course/libs/string_/string_.c"
 
 #define CHAR_SET_SIZE 26
@@ -32,11 +31,22 @@ int allLettersPresent(char *str, char *word) {
     return 0;
 }
 
-int main() {
-    char str[] = "The quick brown fox jumps over the lazy dog";
+void test_allLettersPresent() {
+    char source[] = "Gloxinia flower";
     char word[] = "fox";
+    int number = allLettersPresent(source, word);
+    char result[2];
 
-    printf("Word \"%s\" in string \"%s\": %s\n", word, str, allLettersPresent(str, word) ? "Present" : "Not present");
+    sprintf(result, "%d", number);
+    ASSERT_STRING("1", result);
+}
+
+void test() {
+    test_allLettersPresent() ;
+}
+
+int main() {
+    test();
 
     return 0;
 }

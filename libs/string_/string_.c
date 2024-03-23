@@ -83,21 +83,22 @@ int strcmp_(const char *lhs, const char *rhs) {
     return *lhs - *rhs;
 }
 
-// char* copy(const char *beginSource, const char *endSource, char *beginDestination) {
-//     while (beginSource < endSource) {
-//         *beginDestination = *beginSource;
-//         beginDestination++;
-//         beginSource++;
-//     }
-
-//     return beginDestination;
-// }
-
 char* copy(const char *beginSource, const char *endSource, char *beginDestination) {
     size_t size = endSource - beginSource;
     memcpy(beginDestination, beginSource, size);
     
     return beginDestination + size;
+}
+
+char* copy2(const char *beginSource, const char *endSource, char *beginDestination) {
+    while (beginSource < endSource) {
+        *beginDestination = *beginSource;
+        beginSource++;
+        beginDestination++;
+    }
+    
+    *beginDestination = '\0';
+    return beginDestination;
 }
 
 char* copyIf(char *beginSource, const char *endSource, char *beginDestination, int (*f)(int)) {
@@ -124,6 +125,84 @@ char* copyIfReverse(char *rbeginSource, const char *rendSource, char *beginDesti
     }
     
     return beginDestination;
+}
+
+int is_delim(char c, char *delim) {
+    while(*delim != '\0') {
+        if(c == *delim) {
+            return 1;
+        }
+
+        delim++;
+    }
+
+    return 0;
+}
+
+char *strtok_(char *inputString, char *delimiters) {
+    static char *nextToken; 
+    if (!inputString) {
+        inputString = nextToken;
+    }
+
+    if (!inputString) {
+        return NULL;
+    }
+
+    while (1) {
+        if (is_delim(*inputString, delimiters)) {
+            inputString++;
+            continue;
+        }
+
+        if (*inputString == '\0') {
+            return NULL; 
+        }
+
+        break;
+    }
+
+    char *tokenStart = inputString;
+    while (1) {
+        if (*inputString == '\0') {
+            nextToken = inputString;
+            return tokenStart;
+        }
+
+        if (is_delim(*inputString, delimiters)) {
+            *inputString = '\0';
+            nextToken = inputString + 1;
+            return tokenStart;
+        }
+
+        inputString++;
+    }
+}
+
+int strncmp_( const char * s1, const char * s2, size_t n ) {
+    while ( n && *s1 && ( *s1 == *s2 ) ) {
+        ++s1;
+        ++s2;
+        --n;
+    }
+
+    if ( n == 0 ){
+        return 0;
+    } else {
+        return ( *(unsigned char *)s1 - *(unsigned char *)s2 );
+    }
+}
+
+char* getEndOfString(char* s) {
+    char* end = s;
+    
+    while(*end) {
+        end++;
+    }
+        
+    end--;
+    
+    return end;
 }
 
 void assertString(const char *expected, char *got,char const *fileName, char const *funcName, int line) {

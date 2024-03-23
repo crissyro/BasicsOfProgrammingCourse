@@ -2,8 +2,8 @@
 #include "C:/Users/fatee/ClionProjects/course/libs/string_/string_.c"
 
 int is_delim(char c, char *delim) {
-    while(*delim != '\0') {
-        if(c == *delim) {
+    while (*delim != '\0') {
+        if (c == *delim) {
             return 1;
         }
 
@@ -13,7 +13,7 @@ int is_delim(char c, char *delim) {
     return 0;
 }
 
-char *my_strtok(char *inputString, char *delimiters) {
+char *strtok_(char *inputString, char *delimiters) {
     static char *nextToken; 
     if (!inputString) {
         inputString = nextToken;
@@ -56,7 +56,7 @@ char *my_strtok(char *inputString, char *delimiters) {
 int checkLexicographicalOrder(char *sentence) {
     char *currentWord, *previousWord = NULL;
     
-    while ((currentWord = my_strtok(previousWord, " ")) != NULL) {
+    while ((currentWord = strtok_(previousWord, " ")) != NULL) {
         if (previousWord != NULL && strcmp(previousWord, currentWord) > 0) {
             return 0;
         }

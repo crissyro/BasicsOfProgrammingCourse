@@ -4,16 +4,27 @@
 #include <stdbool.h>
 #include "C:/Users/fatee/ClionProjects/course/libs/string_/string_.c"
 
-bool isPalindrome(char *str) {
-    int i = 0, j = 0;
-    while (str[j] != '\0') {
-        j++;
-    }
-    j--;
+// bool isPalindrome(char *str) {
+//     int i = 0, j = 0;
+//     while (str[j] != '\0') {
+//         j++;
+//     }
+//     j--;
 
-    while (i < j) {
-        if (str[i++] != str[j--])
+//     while (i < j) {
+//         if (str[i++] != str[j--])
+//             return false;
+//     }
+
+//     return true;
+// }
+
+bool isPalindrome(char *word) {
+    int len = strlen_(word);
+    for (int i = 0; i < len / 2; i++) {
+        if (tolower(word[i]) != tolower(word[len - i - 1])) {
             return false;
+        }
     }
 
     return true;
@@ -83,3 +94,20 @@ int main() {
 
     return 0;
 }
+
+// void test_removePalinWords() {
+//     char source[] = "Text contains malayalam and level words";
+//     char *result = removePalinWords(source);
+//     ASSERT_STRING("Text contains and words", result);
+//     free(result);
+// }
+
+// void test() {
+//     test_removePalinWords() ;
+// }
+
+// int main() {
+//     test();
+
+//     return 0;
+// }

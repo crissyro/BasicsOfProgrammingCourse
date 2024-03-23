@@ -2,28 +2,26 @@
 #include "C:/Users/fatee/ClionProjects/course/libs/string_/string_.c"
 
 void removeAdjacentEqualLetters(char *s) {
-    if (s == NULL || *s == '\0') {
-        return;
-    }
+    char *destination = s;
+    char *current = s + 1;
 
-    int len = strlen_(s);
-    int writeIndex = 0;
-
-    for (int i = 1; i < len; i++) {
-        if (s[i] != s[writeIndex]) {
-            writeIndex++;
-            s[writeIndex] = s[i];
+    while (*current != '\0') {
+        if (*current != *destination) {
+            destination++;
+            *destination = *current;
         }
+
+        current++;
     }
 
-    writeIndex++;
-    s[writeIndex] = '\0';
+    destination++;
+    *destination = '\0';
 }
 
 void test_removeAdjacentEqualLetters() {
-    char s[] = "aaabbbcccdddeee";
-    removeAdjacentEqualLetters(s);
-    ASSERT_STRING("abcde", s);
+    char source[] = "aaabbbcccdddeee";
+    removeAdjacentEqualLetters(source);
+    ASSERT_STRING("abcde", source);
 }
 
 void test() {

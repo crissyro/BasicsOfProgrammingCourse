@@ -47,19 +47,27 @@ void findWordBefore(char** words1, int count1, char* str2) {
     }
 }
 
-int main() {
-    char s1[] = "This is a test string";
-    char s2[] = "Another test here";
+void test_extractWordsDifferentFromLast() {
+    char source1[] = "apple banana cherry";
+    char source2[] = "cherry banana";
+    int count = 0;
+    char** words = tokenizeString(source1, &count);
 
-    int count1 = 0;
-    char** words1 = tokenizeString(s1, &count1);
+    findWordBefore(words, count, source2);
+    ASSERT_STRING("apple", source1);
 
-    findWordBefore(words1, count1, s2);
-
-    for (int i = 0; i < count1; ++i) {
-        free(words1[i]);
+    for (int i = 0; i < count; ++i) {
+        free(words[i]);
     }
-    free(words1);
+    free(words);
+}
+
+void test() {
+    test_extractWordsDifferentFromLast() ;
+}
+
+int main() {
+    test();
 
     return 0;
 }

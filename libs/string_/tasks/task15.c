@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "C:/Users/fatee/ClionProjects/course/libs/string_/string_.c"
 
 char* extractWordsDifferentFromLast(const char *s) {
@@ -51,16 +52,18 @@ char* extractWordsDifferentFromLast(const char *s) {
     return result;
 }
 
-int main() {
-    const char s[] = "This is a test last string for extracting words different from last";
-    char *result = extractWordsDifferentFromLast(s);
+void test_extractWordsDifferentFromLast() {
+    char source[] = "apple banana cherry apple";
+    char* result = extractWordsDifferentFromLast(source);
+    ASSERT_STRING("banana cherry", result);
+}
 
-    if (result != NULL) {
-        printf("Words different from the last: %s\n", result);
-        free(result);
-    } else {
-        printf("No words different from the last found.\n");
-    }
+void test() {
+    test_extractWordsDifferentFromLast() ;
+}
+
+int main() {
+    test();
 
     return 0;
 }

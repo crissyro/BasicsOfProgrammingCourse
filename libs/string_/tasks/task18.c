@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include "C:/Users/fatee/ClionProjects/course/libs/string_/string_.c"
 
-void processStrings(char *s1, char *s2, int n1, int n2) {
+void addLastWordsToLine(char *s1, char *s2, int n1, int n2) {
     char *wordArray[100];
     int wordArrayIndex = 0;
 
@@ -22,19 +22,26 @@ void processStrings(char *s1, char *s2, int n1, int n2) {
         endS1 = copy(wordArray[wordArrayIndex - j], findSpace(wordArray[wordArrayIndex - j]), endS1);
     }
 
-    printf("Result: %s\n", s1);
-
     for (int j = 0; j < wordArrayIndex; j++) {
         free(wordArray[j]);
     }
 }
 
-int main() {
-    char s1[100] = "aaa bbb ccc";
-    char s2[100] = "ddd eee fff ggg hhh";
+void test_addLastWordsToLine() {
+    char source1[] = "aaa bbb ccc";
+    char source2[] = "ddd eee fff ggg hhh";
     int n1 = 3, n2 = 5;
+    addLastWordsToLine(source1, source2, n1, n2);
 
-    processStrings(s1, s2, n1, n2);
+    ASSERT_STRING("aaa bbb ccc ggg hhh", source1);
+}
+
+void test() {
+    test_addLastWordsToLine() ;
+}
+
+int main() {
+    test();
 
     return 0;
 }
