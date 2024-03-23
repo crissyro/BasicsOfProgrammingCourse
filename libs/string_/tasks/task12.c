@@ -82,3 +82,21 @@ int main() {
 
     return 0;
 }
+
+// void test_removeNonLetters() {
+//     char str1[] = "This is a test string";
+//     char str2[] = "Test this string for words";
+//     wordDescriptorToString(word, string);
+//     findLastMatchingWord(s);
+//     ASSERT_STRING("Hi123", s);
+// }
+
+// void test() {
+//     test_removeNonLetters() ;
+// }
+
+// int main() {
+//     test();
+
+//     return 0;
+// }

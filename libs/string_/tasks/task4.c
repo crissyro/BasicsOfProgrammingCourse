@@ -2,9 +2,7 @@
 #include <ctype.h>
 #include "C:/Users/fatee/ClionProjects/course/libs/string_/string_.c"
 
-#define MAX_STRING_SIZE 100
-
-void replace_digits_with_spaces(char *input) {
+void replaceDigitsWithSpaces(char *input) {
     char buffer[MAX_STRING_SIZE];
     int buffer_index = 0;
 
@@ -34,3 +32,19 @@ int main() {
 
     return 0;
 }
+
+// void test_replaceDigitsWithSpaces() {
+//     char s[] = "a2b3c1d";
+//     replaceDigitsWithSpaces(s);
+//     ASSERT_STRING("a  b   c d", s);
+// }
+
+// void test() {
+//     test_replaceDigitsWithSpaces() ;
+// }
+
+// int main() {
+//     test();
+
+//     return 0;
+// }

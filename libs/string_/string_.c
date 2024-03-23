@@ -74,7 +74,7 @@ char* findSpaceReverse(char *rbegin, const char *rend) {
     return rbegin;
 }
 
-int strcmp(const char *lhs, const char *rhs) {
+int strcmp_(const char *lhs, const char *rhs) {
     while (*lhs && *rhs && *lhs == *rhs) {
         lhs++;
         rhs++;
@@ -124,4 +124,15 @@ char* copyIfReverse(char *rbeginSource, const char *rendSource, char *beginDesti
     }
     
     return beginDestination;
+}
+
+void assertString(const char *expected, char *got,char const *fileName, char const *funcName, int line) {
+    if (strcmp(expected, got)) {
+        fprintf(stderr, "File %s\n", fileName);
+        fprintf(stderr, "%s - failed on line %d\n", funcName, line);
+        fprintf(stderr, "Expected: \"%s\"\n", expected);
+        fprintf(stderr, "Got: \"%s\"\n\n", got);
+    } else {
+        fprintf(stderr, "%s - OK\n", funcName);
+    }
 }

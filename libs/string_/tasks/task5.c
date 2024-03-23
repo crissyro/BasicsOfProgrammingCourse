@@ -1,12 +1,8 @@
 #include <stdio.h>
+#include <string.h>
 #include "C:/Users/fatee/ClionProjects/course/libs/string_/string_.c"
 
-typedef struct {
-    char *begin;
-    char *end;
-} WordDescriptor;
-
-void replace(char *source, char *w1, char *w2) {
+void replaceAllOccurrencesOfWord(char *source, char *w1, char *w2) {
     size_t w1Size = strlen_(w1);
     size_t w2Size = strlen_(w2);
     WordDescriptor word1 = {w1, w1 + w1Size};
@@ -37,14 +33,20 @@ void replace(char *source, char *w1, char *w2) {
     *recPtr = '\0';
 }
 
-int main() {
-    char source[] = "apple orange apple banana apple";
+void test_replaceAllOccurrencesOfWord() {
+    char s[] = "apple orange apple banana apple";
     char w1[] = "apple";
     char w2[] = "pear";
+    replaceAllOccurrencesOfWord(s, w1, w2);
+    ASSERT_STRING("pear orange pear banana pear", s);
+}
 
-    printf("Before replacement: %s\n", source);
-    replace(source, w1, w2);
-    printf("After replacement: %s\n", source);
+void test() {
+    test_replaceAllOccurrencesOfWord() ;
+}
+
+int main() {
+    test();
 
     return 0;
 }

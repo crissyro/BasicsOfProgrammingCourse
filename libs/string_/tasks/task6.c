@@ -1,11 +1,6 @@
 #include <stdio.h>
 #include "C:/Users/fatee/ClionProjects/course/libs/string_/string_.c"
 
-typedef struct {
-    char word[50];
-} WordDescriptor;
-
-
 int is_delim(char c, char *delim) {
     while(*delim != '\0') {
         if(c == *delim) {
@@ -72,13 +67,18 @@ int checkLexicographicalOrder(char *sentence) {
     return 1;
 }
 
+void test_checkLexicographicalOrder() {
+    char s[] = "apple banana cherry";
+    checkLexicographicalOrder(s);
+    ASSERT_STRING("apple banana cherry", s);
+}
+
+void test() {
+    test_checkLexicographicalOrder() ;
+}
+
 int main() {
-    char sentence[] = "apple banana cherry";
-    if (checkLexicographicalOrder(sentence)) {
-        printf("Words in the sentence are lexicographically ordered.\n");
-    } else {
-        printf("Words in the sentence are not lexicographically ordered.\n");
-    }
+    test();
 
     return 0;
 }

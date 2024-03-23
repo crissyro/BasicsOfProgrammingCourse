@@ -3,8 +3,29 @@
 
 #include <stdio.h>
 
-#define MAX_STRING_SIZE
+#define ASSERT_STRING(expected, got) assertString(expected, got, __FILE__, __FUNCTION__, __LINE__)
+#define MAX_STRING_SIZE 100
+#define MAX_N_WORDS_IN_STRING 100
+#define MAX_WORD_SIZE 20
+
 char _stringBuffer[MAX_STRING_SIZE + 1];
+
+typedef struct WordDescriptor {
+    char *begin; // позиция начала слова
+    char *end; // позиция первого символа, после последнего символа слова
+} WordDescriptor;
+
+typedef struct BagOfWords {
+    WordDescriptor words[MAX_N_WORDS_IN_STRING];
+    size_t size;
+} BagOfWords;
+
+typedef enum WordBeforeFirstWordWithAReturnCode {
+    FIRST_WORD_WITH_A,
+    NOT_FOUND_A_WORD_WITH_A,
+    WORD_FOUND,
+    EMPTY_STRING
+} WordBeforeFirstWordWithAReturnCode;
 
 // Возвращает количество символов в строке 
 size_t strlen1(char *s) ;
@@ -41,7 +62,7 @@ char* findNonSpaceReverse(char *rbegin, const char *rend) ;
 char* findSpaceReverse(char *rbegin, const char *rend) ;
 
 // Проверяет строки на равенство
-int strcmp(const char *lhs, const char *rhs) ;
+int strcmp_(const char *lhs, const char *rhs) ;
 
 // Записывает по адресу beginDestination фрагмент памяти, 
 // начиная с адреса beginSource до endSource.
