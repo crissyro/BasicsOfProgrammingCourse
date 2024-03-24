@@ -2,6 +2,11 @@
 #include <stdbool.h>
 #include "C:/Users/fatee/ClionProjects/course/libs/string_/string_.c"
 
+typedef struct WordDescriptor {
+    char *begin; // позиция начала слова
+    char *end; // позиция первого символа, после последнего символа слова
+} WordDescriptor;
+
 #define MAX_STRING_SIZE 100
 
 typedef struct WordDescriptor {
@@ -55,3 +60,32 @@ int main() {
 
     return 0;
 }
+
+// #include <stdio.h>
+// #include <stdbool.h>
+// #include "C:/Users/fatee/ClionProjects/course/libs/string_/string_.c"
+
+// void digitToStart111(char *beginString) {
+//     char *beginSearch = beginString;
+//     WordDescriptor word;
+//     while (getWord(beginSearch, &word)) {
+//        digitToStart(word);
+//        beginSearch = word.end;
+//     }
+// }
+
+// void test_digitToStart111() {
+//     char source[] = "123Hi";
+//     digitToStart111(source);
+//     ASSERT_STRING("31Hi", source);
+// }
+
+// void test() {
+//     test_digitToStart111() ;
+// }
+
+// int main() {
+//     test();
+
+//     return 0;
+// }

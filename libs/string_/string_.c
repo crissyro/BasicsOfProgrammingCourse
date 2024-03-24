@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdbool.h>
 #include <ctype.h>
 #include "string_.h"
 
@@ -193,6 +194,16 @@ int strncmp_( const char * s1, const char * s2, size_t n ) {
     }
 }
 
+int getWord(char *beginSearch, WordDescriptor *word) {
+    word->begin = findNonSpace(beginSearch);
+    if (*word->begin == '\0')
+        return 0;
+
+    word->end = findSpace(word->begin);
+
+    return 1;
+}
+
 char* getEndOfString(char* s) {
     char* end = s;
     
@@ -205,8 +216,26 @@ char* getEndOfString(char* s) {
     return end;
 }
 
+bool getWordReverse(char *rbegin, char *rend, WordDescriptor *word) {
+    word->end = rbegin;
+    word->begin = findSpaceReverse(rbegin, rend);
+
+    if (word->begin == rend)
+        return 0;
+
+    word->begin = findNonSpaceReverse(word->begin, rend);
+    
+    return 1;
+}
+
+void digitToStart(WordDescriptor word) {
+    char *endStringBuffer = copy(word.begin, word.end, _stringBuffer);
+    char *recPosition = copyIfReverse(endStringBuffer - 1, _stringBuffer - 1, word.begin, isdigit);
+    copyIf(_stringBuffer, endStringBuffer, recPosition, isalpha);
+}
+
 void assertString(const char *expected, char *got,char const *fileName, char const *funcName, int line) {
-    if (strcmp(expected, got)) {
+    if (strcmp_(expected, got)) {
         fprintf(stderr, "File %s\n", fileName);
         fprintf(stderr, "%s - failed on line %d\n", funcName, line);
         fprintf(stderr, "Expected: \"%s\"\n", expected);

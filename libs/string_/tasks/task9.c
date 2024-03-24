@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdbool.h>
+#include "C:/Users/fatee/ClionProjects/course/libs/string_/string_.c"
 
 typedef struct {
     char *begin;

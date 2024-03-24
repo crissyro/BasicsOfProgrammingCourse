@@ -3,11 +3,15 @@
 #include "C:/Users/fatee/ClionProjects/course/libs/string_/string_.c"
 
 bool isPalindrome(char *word) {
-    int len = strlen_(word);
-    for (int i = 0; i < len / 2; i++) {
-        if (tolower(word[i]) != tolower(word[len - i - 1])) {
+    char *start = word;
+    char *end = word + strlen_(word) - 1;
+
+    while (start < end) {
+        if (tolower(*start) != tolower(*end)) {
             return false;
         }
+        start++;
+        end--;
     }
 
     return true;
