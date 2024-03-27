@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
 #include "C:/Users/fatee/ClionProjects/course/libs/string_/string_.c"
 
 char* extractWordsDifferentFromLast(const char *s) {
@@ -29,9 +28,10 @@ char* extractWordsDifferentFromLast(const char *s) {
         copy(start, end, currentWord);
         currentWord[end - start] = '\0';
 
-        if (strcmp(currentWord, lastWord) != 0) {
+        if (strcmp_(currentWord, lastWord) != 0) {
             if (result == NULL) {
-                result = strdup(currentWord);
+                result = (char*)malloc(strlen_(currentWord) + 1);
+                copy2(currentWord, currentWord + strlen_(currentWord), result);
             } else {
                 int len = strlen(result) + strlen(currentWord) + 2;
                 temp = (char*)malloc(len);

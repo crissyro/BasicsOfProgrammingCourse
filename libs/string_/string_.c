@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdbool.h>
 #include <ctype.h>
+// #include <string.h>
 #include "string_.h"
 
 size_t strlen1(char *s) {
@@ -194,6 +195,33 @@ int strncmp_( const char * s1, const char * s2, size_t n ) {
     }
 }
 
+char* strstr_(const char * mainStr, const char * subStr) {
+    char *s1, *s2;
+ 
+    while( *mainStr != NULL) {
+        if(*mainStr == *subStr) {
+            s1 = mainStr;
+            s2 = subStr;
+ 
+            while (*s1 && *s2 ) {
+                if(*s1 != *s2)
+                    break;
+ 
+                s1++;
+                s2++;
+            }
+            
+            if (*s2 == NULL) {
+                return mainStr;
+            }
+        }
+ 
+        mainStr++;
+    }
+ 
+    return NULL;
+}
+
 int getWord(char *beginSearch, WordDescriptor *word) {
     word->begin = findNonSpace(beginSearch);
     if (*word->begin == '\0')
@@ -235,7 +263,7 @@ void digitToStart(WordDescriptor word) {
 }
 
 void assertString(const char *expected, char *got,char const *fileName, char const *funcName, int line) {
-    if (strcmp_(expected, got)) {
+    if (strcmp(expected, got)) {
         fprintf(stderr, "File %s\n", fileName);
         fprintf(stderr, "%s - failed on line %d\n", funcName, line);
         fprintf(stderr, "Expected: \"%s\"\n", expected);

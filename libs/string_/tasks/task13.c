@@ -1,17 +1,6 @@
 #include <stdio.h>
 #include "C:/Users/fatee/ClionProjects/course/libs/string_/string_.c"
 
-int getWord(char *beginSearch, WordDescriptor *word) {
-    word->begin = findNonSpace(beginSearch);
-    if (*word->begin == '\0') {
-        return 0;
-    }
-
-    word->end = findSpace(word->begin);
-
-    return 1;
-}
-
 int checkForDuplicateWord(char *str) {
     int flag = 0;
     WordDescriptor word1, word2;

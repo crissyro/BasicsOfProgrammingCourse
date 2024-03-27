@@ -2,26 +2,15 @@
 #include "C:/Users/fatee/ClionProjects/course/libs/string_/string_.c"
 
 void getBagOfWords(BagOfWords *bag, char *s) {
-    char *p = s;
-    bag->size = 0;
-
-    while (*p != '\0') {
-        while (*p == ' ') {
-            p++;
-        }
-
-        if (*p == '\0') {
-            break;
-        }
-
-        bag->words[bag->size].begin = p;
-
-        while (*p != ' ' && *p != '\0') {
-            p++;
-        }
-
-        bag->words[bag->size].end = p;
-        bag->size++;
+    char *current = s;
+    WordDescriptor word;
+    int i = 0;
+    while (getWord(current, &word)) {
+        bag->words[i].begin = word.begin;
+        bag->words[i].end = word.end;
+        bag->size = i + 1;
+        current = word.end + 1;
+        i++;
     }
 }
 

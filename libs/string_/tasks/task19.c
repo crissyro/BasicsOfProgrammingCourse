@@ -5,7 +5,6 @@
 
 int allLettersPresent(char *str, char *word) {
     int wordLen = strlen_(word);
-
     int charSet[CHAR_SET_SIZE] = {0};
 
     for (int i = 0; i < wordLen; i++) {
@@ -35,7 +34,7 @@ void test_allLettersPresent() {
     char source[] = "Gloxinia flower";
     char word[] = "fox";
     int number = allLettersPresent(source, word);
-    char result[2];
+    char result[MAX_STRING_SIZE];
 
     sprintf(result, "%d", number);
     ASSERT_STRING("1", result);

@@ -1,21 +1,56 @@
 #include <stdio.h>
-#include <stdlib.h>
 #include "C:/Users/fatee/ClionProjects/course/libs/string_/string_.c"
- 
-char *functionConvert(const char *s) {
-    int size = strlen_(s);
-    char *temp = malloc(size);
-    int t_size = size-1;
 
-    for (int i = 0; i < size; i++) {
-        temp[i] = s[t_size-i];
+void reverseWordsOrder(char *source) {
+    char destination[MAX_STRING_SIZE];
+    copy(source, source + strlen_(source), destination);
+
+    char *rbegin = destination;
+    char *current = source;
+
+    while (*rbegin != '\0') {
+        rbegin++;
     }
-    
-    return temp;
+
+    int index = rbegin - destination - 1;
+    int i = index;
+
+    while (i >= 0) {
+        while (i >= 0 && *(destination + i) != ' ') {
+            i--;
+        }
+
+        int j = i + 1;
+        while (j <= index) {
+            *current = *(destination + j);
+            current++;
+            j++;
+        }
+
+        if (i >= 0) {
+            *current = ' ';
+            current++;
+        }
+
+        index = i - 1;
+        i--;
+    }
+
+    *current = '\0';
 }
- 
+
+void test_reverseWordsOrder() {
+    char source[] = "apple orange banana";
+    reverseWordsOrder(source);
+    ASSERT_STRING("banana orange apple", source);
+}
+
+void test() {
+    test_reverseWordsOrder() ;
+}
+
 int main() {
-    const char *s = "hello girls";
-    char *newStr = functionConvert(s);
-    printf("%s\n", newStr);
+    test();
+
+    return 0;
 }

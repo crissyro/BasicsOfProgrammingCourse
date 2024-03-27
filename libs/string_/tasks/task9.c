@@ -1,65 +1,61 @@
 #include <stdio.h>
-#include <stdbool.h>
 #include "C:/Users/fatee/ClionProjects/course/libs/string_/string_.c"
 
-typedef struct {
-    char *begin;
-    char *end;
-} WordDescriptor;
-
-bool getWord(char **beginSearch, WordDescriptor *word) {
-    char *p = *beginSearch;
-    while (*p == ' ') {
-        p++;
-    }
-    if (*p == '\0') {
-        return false;
-    }
-    word->begin = p;
-    while (*p != ' ' && *p != '\0') {
-        p++;
-    }
-    word->end = p;
-    *beginSearch = p;
-    return true;
-}
-
-int main() {
-    char s1[] = "Hello world from first string";
-    char s2[] = "This is the second string cat dog";
-
+void getAlternatingWords(char *s1, char *s2, char *destination) {
     WordDescriptor word1, word2;
     bool isW1Found, isW2Found;
     char *beginSearch1 = s1, *beginSearch2 = s2;
+    char *endDestination = destination;
 
-    while ((isW1Found = getWord(&beginSearch1, &word1)), (isW2Found = getWord(&beginSearch2, &word2)), isW1Found || isW2Found) {
+    while ((isW1Found = getWord(beginSearch1, &word1)),
+           (isW2Found = getWord(beginSearch2, &word2)),
+           isW1Found || isW2Found) {
+
         if (isW1Found) {
-            for (char *p = word1.begin; p < word1.end; p++) {
-                printf("%c", *p);
+            char *word1Ptr = word1.begin;
+            while (word1Ptr < word1.end) {
+                *endDestination = *word1Ptr;
+                endDestination++;
+                word1Ptr++;
             }
-            printf(" ");
+            *endDestination = ' ';
+            endDestination++;
         }
+
         if (isW2Found) {
-            for (char *p = word2.begin; p < word2.end; p++) {
-                printf("%c", *p);
+            char *word2Ptr = word2.begin;
+            while (word2Ptr < word2.end) {
+                *endDestination = *word2Ptr;
+                endDestination++;
+                word2Ptr++;
             }
-            printf(" ");
+            *endDestination = ' ';
+            endDestination++;
         }
+
+        beginSearch1 = word1.end;
+        beginSearch2 = word2.end;
     }
 
-    while (getWord(&beginSearch1, &word1)) {
-        for (char *p = word1.begin; p < word1.end; p++) {
-            printf("%c", *p);
-        }
-        printf(" ");
-    }
+    endDestination--;
+    *endDestination = '\0';
+}
 
-    while (getWord(&beginSearch2, &word2)) {
-        for (char *p = word2.begin; p < word2.end; p++) {
-            printf("%c", *p);
-        }
-        printf(" ");
-    }
+void test_getAlternatingWords() {
+    char s1[] = "Hello World How Are You";
+    char s2[] = "I Am Fine Thank You";
+    char result[MAX_STRING_SIZE];
+
+    getAlternatingWords(s1, s2, result);
+    ASSERT_STRING("Hello I World Am How Fine Are Thank You You", result);
+}
+
+void test() {
+    test_getAlternatingWords() ;
+}
+
+int main() {
+    test();
 
     return 0;
 }

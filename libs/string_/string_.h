@@ -69,6 +69,8 @@ int strcmp_(const char *lhs, const char *rhs) ;
 // Возвращает указатель на следующий свободный фрагмент памяти в destination
 char* copy(const char *beginSource, const char *endSource, char *beginDestination) ;
 
+char* copy2(const char *beginSource, const char *endSource, char *beginDestination) ;
+
 // Записывает по адресу beginDestination элементы из фрагмента памяти 
 // начиная с beginSource заканчивая endSource, удовлетворяющие функции-предикату f. 
 // Функция возвращает указатель на следующий свободный для записи фрагмент в памяти.
@@ -78,5 +80,21 @@ char* copyIf(char *beginSource, const char *endSource, char *beginDestination, i
 // начиная с rbeginSource заканчивая rendSource, удовлетворяющие функции-предикату f. 
 // Функция возвращает значение beginDestination по окончанию работы.
 char* copyIfReverse(char *rbeginSource, const char *rendSource, char *beginDestination, int (*f)(int)) ;
+
+int is_delim(char c, char *delim) ;
+
+char *strtok_(char *inputString, char *delimiters) ;
+
+int strncmp_( const char * s1, const char * s2, size_t n ) ;
+
+int getWord(char *beginSearch, WordDescriptor *word) ;
+
+char* getEndOfString(char* s) ;
+
+bool getWordReverse(char *rbegin, char *rend, WordDescriptor *word) ;
+
+void digitToStart(WordDescriptor word) ;
+
+void assertString(const char *expected, char *got,char const *fileName, char const *funcName, int line) ;
 
 #endif

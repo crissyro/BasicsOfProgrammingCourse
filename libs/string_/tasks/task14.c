@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
 #include "C:/Users/fatee/ClionProjects/course/libs/string_/string_.c"
 
 int compare(const void *a, const void *b) {
@@ -8,56 +7,53 @@ int compare(const void *a, const void *b) {
 }
 
 int checkSameLettersPair(const char *s) {
-    char *buffer = strdup(s);
-    char *begin = buffer;
-    char *end = buffer + strlen_(buffer);
-    char *wordBegin = findNonSpace(buffer);
-    char *wordEnd = findSpace(wordBegin);
+    char *buffer = (char *)malloc(strlen_(s) + 1);
+    copy(s, s + strlen_(s), buffer);
 
-    char **words = NULL;
-    int count = 0;
+    BagOfWords bag;
+    bag.size = 0;
 
-    while (wordBegin < end) {
-        size_t wordLen = wordEnd - wordBegin;
-        char *word = (char *)malloc(wordLen + 1);
-        copy(wordBegin, wordEnd, word);
-        word[wordLen] = '\0';
+    char *word = strtok_(buffer, " ");
+    while (word != NULL) {
+        qsort(word, strlen_(word), sizeof(char), compare);
 
-        qsort(word, wordLen, sizeof(char), compare);
-
-        for (int i = 0; i < count; i++) {
-            if (strcmp(words[i], word) == 0) {
+        for (size_t i = 0; i < bag.size; i++) {
+            if (strcmp_(bag.words[i].begin, word) == 0) {
                 free(buffer);
-                free(word);
                 return 1;
             }
         }
 
-        words = (char **)realloc(words, (count + 1) * sizeof(char *));
-        words[count] = word;
-        count++;
+        bag.words[bag.size].begin = (char *)malloc(strlen_(word) + 1);
+        copy(word, word + strlen_(word), bag.words[bag.size].begin);
+        bag.size++;
 
-        wordBegin = findNonSpace(wordEnd);
-        wordEnd = findSpace(wordBegin);
+        word = strtok_(NULL, " ");
     }
 
     free(buffer);
-    for (int i = 0; i < count; i++) {
-        free(words[i]);
+    for (size_t i = 0; i < bag.size; i++) {
+        free(bag.words[i].begin);
     }
-    
-    free(words);
 
     return 0;
 }
 
+void test_checkSameLettersPair() {
+    char source[] = "cat tac hello world";
+    int number = checkSameLettersPair(source);
+    char result[MAX_STRING_SIZE];
+
+    sprintf(result, "%d", number);
+    ASSERT_STRING("1", result);
+}
+
+void test() {
+    test_checkSameLettersPair() ;
+}
+
 int main() {
-    const char s[] = "cat tac silent hello world";
-    if (checkSameLettersPair(s)) {
-        printf("YES\n");
-    } else {
-        printf("Пара слов с одинаковым набором букв не найдена.\n");
-    }
+    test();
 
     return 0;
 }

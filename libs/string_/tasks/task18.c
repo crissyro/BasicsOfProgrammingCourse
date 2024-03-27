@@ -3,7 +3,7 @@
 #include "C:/Users/fatee/ClionProjects/course/libs/string_/string_.c"
 
 void addLastWordsToLine(char *s1, char *s2, int n1, int n2) {
-    char *wordArray[100];
+    char *wordArray[MAX_STRING_SIZE];
     int wordArrayIndex = 0;
 
     for (char *token = s2; *token; token = findNonSpace(findSpace(token))) {
