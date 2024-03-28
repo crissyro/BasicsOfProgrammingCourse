@@ -11,7 +11,7 @@ void getDigitsAtBeginOfLetterAtEnd(char *beginString) {
     char *beginSearch = beginString;
     WordDescriptor word;
     while (getWord(beginSearch, &word)) {
-       digitToStart1(word);
+       digitToStart_(word);
        beginSearch = word.end;
     }
 }
@@ -19,7 +19,7 @@ void getDigitsAtBeginOfLetterAtEnd(char *beginString) {
 void test_getDigitsAtBeginOfLetterAtEnd() {
     char source[] = "Hi123 Hello456";
     getDigitsAtBeginOfLetterAtEnd(source);
-    ASSERT_STRING("31Hi", source);
+    ASSERT_STRING("123Hi 456Hello", source);
 }
 
 void test() {

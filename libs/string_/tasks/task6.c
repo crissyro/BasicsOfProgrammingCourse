@@ -34,7 +34,7 @@ int checkLexicographicalOrder(char *source) {
 void test_checkLexicographicalOrder() {
     char source[] = "apple banana cherry";
     int number = checkLexicographicalOrder(source);
-    char result[2];
+    char result[MAX_STRING_SIZE];
 
     sprintf(result, "%d", number);
     ASSERT_STRING("1", result);

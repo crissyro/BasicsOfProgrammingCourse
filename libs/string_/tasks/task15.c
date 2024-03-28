@@ -33,7 +33,7 @@ char* extractWordsDifferentFromLast(const char *s) {
                 result = (char*)malloc(strlen_(currentWord) + 1);
                 copy2(currentWord, currentWord + strlen_(currentWord), result);
             } else {
-                int len = strlen(result) + strlen(currentWord) + 2;
+                int len = strlen_(result) + strlen_(currentWord) + 2;
                 temp = (char*)malloc(len);
                 snprintf(temp, len, "%s %s", result, currentWord);
                 free(result);

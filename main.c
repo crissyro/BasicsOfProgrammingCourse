@@ -1,65 +1,47 @@
 #include <stdio.h>
-#include <stdlib.h>
 #include "C:/Users/fatee/ClionProjects/course/libs/string_/string_.c"
 
-char* extractWordsDifferentFromLast(const char *s) {
-    char *lastWord = NULL;
-    char *currentWord = NULL;
-    char *result = NULL;
-    char *temp = NULL;
-
-    char *start = findNonSpace(s);
-    char *end = findSpace(start);
-
-    while (*end != '\0') {
-        start = findNonSpace(end);
-        end = findSpace(start);
+int areWordsEqual(WordDescriptor w1, WordDescriptor w2) {
+    int len1 = w1.end - w1.begin;
+    int len2 = w2.end - w2.begin;
+    
+    if (len1 != len2) {
+        return 0;
     }
-
-    lastWord = (char*)malloc(end - start + 1);
-    copy(start, end, lastWord);
-    lastWord[end - start] = '\0';
-
-    start = findNonSpace(s);
-    end = findSpace(start);
-
-    while (*end != '\0') {
-        currentWord = (char*)malloc(end - start + 1);
-        copy(start, end, currentWord);
-        currentWord[end - start] = '\0';
-
-        if (strcmp_(currentWord, lastWord) != 0) {
-            if (result == NULL) {
-                result = (char*)malloc(strlen_(currentWord) + 1);
-                copy2(currentWord, currentWord + strlen_(currentWord), result);
-            } else {
-                int len = strlen(result) + strlen(currentWord) + 2;
-                temp = (char*)malloc(len);
-                snprintf(temp, len, "%s %s", result, currentWord);
-                free(result);
-                result = temp;
-            }
-        } else {
-            free(currentWord);
-        }
-
-        start = findNonSpace(end);
-        end = findSpace(start);
-    }
-
-    free(lastWord);
-
-    return result;
+    
+    return strncmp_(w1.begin, w2.begin, len1) == 0;
 }
 
-void test_extractWordsDifferentFromLast() {
-    char source[] = "apple banana cherry apple";
-    char* result = extractWordsDifferentFromLast(source);
-    ASSERT_STRING("banana cherry", result);
+int checkLexicographicalOrder(char *source) {
+    WordDescriptor currentWord, previousWord = {NULL, NULL};
+    char *token = strtok_(source, " ");
+
+    while (token != NULL) {
+        currentWord.begin = token;
+        currentWord.end = token + strlen_(token);
+
+        if (previousWord.begin != NULL && (!areWordsEqual(previousWord, currentWord) && strcmp_(previousWord.begin, currentWord.begin) > 0)) {
+            return 0;
+        }
+        
+        previousWord = currentWord;
+        token = strtok_(NULL, " ");
+    }
+ 
+    return 1;
+}
+
+void test_checkLexicographicalOrder() {
+    char source[] = "apple banana cherry";
+    int number = checkLexicographicalOrder(source);
+    char result[MAX_STRING_SIZE];
+
+    sprintf(result, "%d", number);
+    ASSERT_STRING("1", result);
 }
 
 void test() {
-    test_extractWordsDifferentFromLast() ;
+    test_checkLexicographicalOrder();
 }
 
 int main() {

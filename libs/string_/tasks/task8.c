@@ -35,7 +35,7 @@ int getNumberOfPalindromes(char* s) {
 void test_getNumberOfPalindromes() {
     char source[] = "level, radar, kayak, hello, civic, rotor";
     int number = getNumberOfPalindromes(source);
-    char result[2];
+    char result[MAX_STRING_SIZE];
 
     sprintf(result, "%d", number);
     ASSERT_STRING("5", result);

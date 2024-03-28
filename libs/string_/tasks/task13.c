@@ -27,7 +27,7 @@ int checkForDuplicateWord(char *str) {
 void test_checkForDuplicateWord() {
     char source[] = "apple banana cherry apple";
     int number = checkForDuplicateWord(source);
-    char result[2];
+    char result[MAX_STRING_SIZE];
 
     sprintf(result, "%d", number);
     ASSERT_STRING("1", result);
