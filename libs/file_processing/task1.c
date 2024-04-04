@@ -44,7 +44,9 @@ void writeMatrix(FILE *file, int matrix[MAX_SIZE][MAX_SIZE], int order) {
 FILE* openFile(const char* filename, const char* mode) {
     FILE* file = fopen(filename, mode);
     if (file == NULL) {
-        printf("File opening error.\n");
+        // or use  printf("errno %d\n", errno), need include <errno.h>, print number of problem,
+        // perror in <stdio.h> print name of problem
+        perror("file");
         exit(1);
     }
 
