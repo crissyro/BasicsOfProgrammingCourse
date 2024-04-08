@@ -8,25 +8,31 @@ typedef struct vector {
     size_t capacity;// вместимость вектора
 } vector;
 
+void check_Memory_(vector *v) {
+    if (v->data == NULL) {
+        fprintf(stderr, "bad alloc");
+        exit(1);
+    }
+}
+
+
 vector createVector(size_t n) {
     vector vec;
-    vec.data = NULL;
+    vec.data = (int *)malloc(n * sizeof(int));
     vec.size = 0;
-    vec.capacity = 0;
+    vec.capacity = n;
 
-    if (n > 0) {
-        vec.data = (int *)malloc(n * sizeof(int));
-
-        if (vec.data == NULL) {
-            fprintf(stderr, "Bad alloc");
-            exit(1);
-        }
-
-        vec.size = n;
-        vec.capacity = n;
-    }
+    check_Memory_(&vec);
 
     return vec;
+}
+
+bool isEmpty(vector *v) {
+    return v->size == 0;
+}
+
+bool isFull(vector *v) {
+    return v->size == v->capacity;
 }
 
 void reserve(vector *v, size_t newCapacity) {
@@ -34,19 +40,14 @@ void reserve(vector *v, size_t newCapacity) {
         free(v->data);
         v->data = NULL;
         v->capacity = 0;
-        v->size = 0;
     } else if (newCapacity < v->size) {
         v->size = newCapacity;
-    } else if (newCapacity > v->capacity) {
-        int *new_data = (int *)realloc(v->data, newCapacity * sizeof(int));
-
-        if (new_data == NULL) {
-            fprintf(stderr, "Bad alloc");
-            exit(1);
-        }
-        
-        v->data = new_data;
         v->capacity = newCapacity;
+        v->data = (int*)realloc(v->data, sizeof(int)*v->size);
+    } else if (newCapacity > v->capacity) {
+        v->capacity = newCapacity;
+        v->data = (int*)realloc(v->data, sizeof(int)*v->capacity);
+        check_Memory_(&v);
     }
 }
 
@@ -56,7 +57,10 @@ void clear(vector *v) {
 }
 
 void shrinkToFit(vector *v) {
-    v->data = (int *)realloc(v->data, v->size * sizeof(int));
+    if (!isFull(v)) {
+        v->data = (int*)realloc(v->data, sizeof(int)*v->size);
+        v->capacity = v->size;
+    }
 }
 
 void deleteVector(vector *v) {
@@ -64,14 +68,6 @@ void deleteVector(vector *v) {
     v->data = NULL;
     v->size = 0; 
     v->capacity = 0;
-}
-
-bool isEmpty(vector *v) {
-    return v->size == 0;
-}
-
-bool isFull(vector *v) {
-    return v->size == v->capacity;
 }
 
 int getVectorValue(vector *v, size_t i) {
@@ -106,19 +102,9 @@ int* atVector(vector *v, size_t index) {
 }
 
 int* back(vector *v) {
-    if (v->size == 0) {
-        fprintf(stderr, "Vector is empty");
-        exit(1);
-    }
-
-    return &(v->data[v->size - 1]);
+    return v->data + v->size - 1;
 }
 
 int* front(vector *v) {
-    if (v->size == 0) {
-        fprintf(stderr, "Vector is empty");
-        exit(1);
-    } 
-
-    return &(v->data[0]);
+    return v->data;
 }
