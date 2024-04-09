@@ -7,13 +7,10 @@ typedef struct bitset {
     uint32_t maxValue ;
 } bitset ;
 
-bitset bitset_create(unsigned maxValue) {
-    bitset new_set;
-    new_set.values = 0;
-    new_set.maxValue = maxValue;
-    return new_set;
+bitset bitset_create(unsigned setMaxValue) {
+    assert (setMaxValue < 32);
+    return (bitset) {0, setMaxValue};
 }
-
 bool bitset_in(bitset set, unsigned value) {
     return set.values & (1 << value);
 }
@@ -39,31 +36,24 @@ void bitset_deleteElement(bitset* set, unsigned int value) {
 }
 
 bitset bitset_union(bitset set1, bitset set2) {
-    bitset result;
-    result.values = set1.values | set2.values;
-    result.maxValue = set1.maxValue > set2.maxValue ? set1.maxValue : set2.maxValue;
-    return result;
+    bitset set3 = {set1.values | set2.values , set1.maxValue | set2.maxValue};
+    return set3;
 }
 
 bitset bitset_intersection(bitset set1, bitset set2) {
-    bitset result;
-    result.values = set1.values & set2.values;
-    result.maxValue = set1.maxValue > set2.maxValue ? set1.maxValue : set2.maxValue;
-    return result;
+    assert (set1.maxValue == set2.maxValue);
+    return (bitset) {set1.values & set2.values, set1.maxValue};
 }
 
 bitset bitset_difference(bitset set1, bitset set2) {
-    bitset result;
-    result.values = set1.values & ~(set2.values);
-    result.maxValue = set1.maxValue > set2.maxValue ? set1.maxValue : set2.maxValue;
-    return result;
+    bitset set3 = {set1.values & ~set2.values , set1.maxValue & ~set2.maxValue};
+    return set3;
 }
 
+
 bitset bitset_symmetricDifference(bitset set1, bitset set2) {
-    bitset result;
-    result.values = (set1.values | set2.values) & ~(set1.values & set2.values);
-    result.maxValue = set1.maxValue > set2.maxValue ? set1.maxValue : set2.maxValue;
-    return result;
+    bitset set3 = {set1.values ^ set2.values , set1.maxValue ^ set2.maxValue};
+    return set3;
 }
 
 bitset bitset_complement(bitset set) {
