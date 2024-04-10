@@ -70,6 +70,7 @@ bool checkSequence(const char* filename, const char* sequence) {
     }
 
     fclose(file);
+    
     return allContainSequence;
 }
 

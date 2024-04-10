@@ -55,7 +55,6 @@ int applyOperator(char operator, int operand1, int operand2) {
     }
 }
 
-
 int calculateExpression(int operand1, char operator1, int operand2, char operator2, int operand3) {
     int result1, result2;
 
@@ -72,12 +71,13 @@ int calculateExpression(int operand1, char operator1, int operand2, char operato
     return result2;
 }
 
-int main() {
+void writeArithmeticExpression(const char* filename) {
     srand(time(NULL));
 
-    FILE *file = openFile("C:/Users/fatee/ClionProjects/course/libs/file_processing/input.txt", "w");
+    FILE *file = openFile(filename, "w");
 
     char operator2 = '\0';
+    
     if (rand() % 2 == 0) {
         operator2 = generateRandomOperator();
     }
@@ -94,19 +94,45 @@ int main() {
     }
 
     fclose(file);
+}
 
-    file = openFile("C:/Users/fatee/ClionProjects/course/libs/file_processing/input.txt", "r+");
+void getCalculatedExpression(const char* filename) {
+    FILE *file = openFile(filename, "r+");
+
+    int operand1, operand2, operand3;
+    char operator1, operator2;
 
     fscanf(file, "%d %c %d %c %d", &operand1, &operator1, &operand2, &operator2, &operand3);
 
     int result = calculateExpression(operand1, operator1, operand2, operator2, operand3);
 
     fseek(file, 0, SEEK_END);
-    fprintf(file, "\n%d", result);
+    fprintf(file, " = %d", result);
 
     fclose(file);
+}
 
-    printf("The result is written to a file input.txt\n");
+void printArithmeticExpression(const char* filename) {
+    FILE* file = openFile(filename, "r");
+
+    char buffer[MAX_SIZE];
+    while (fgets(buffer, sizeof(buffer), file) != NULL) {
+        printf("%s", buffer);
+    }
+
+    fclose(file);
+}
+
+int main() {
+    const char* filename = "C:/Users/fatee/ClionProjects/course/libs/file_processing/input.txt";
+
+    writeArithmeticExpression(filename);
+
+    getCalculatedExpression(filename);
+
+    printArithmeticExpression(filename);
+
+    printf("\nThe result is written to a file input.txt");
 
     return 0;
 }

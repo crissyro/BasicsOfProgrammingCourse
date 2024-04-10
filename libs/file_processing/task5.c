@@ -114,6 +114,7 @@ int main() {
     const char* outputFile = "C:/Users/fatee/ClionProjects/course/libs/file_processing/output.txt";
 
     generateRandomWords(inputFile);
+    
     maxWords(inputFile, outputFile);
 
     checkReceivedWords(inputFile, outputFile);
