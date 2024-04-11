@@ -64,7 +64,7 @@ void printPolynomial(char *filename, int x, int nPolynomial, int nMember) {
     FILE *file = openFile(filename, "rb");
     
     for (int i = 0; i < nPolynomial; ++i) {
-        int allZero = 1;
+        int allZero = 1;    
         int sum = 0;
         int x_pow = 0;
 
@@ -103,7 +103,7 @@ int main() {
     char *filename = "C:/Users/fatee/ClionProjects/course/libs/file_processing/input.txt";
     int nPolynomial = 3;
     int nMember = 4;
-    int x = 2;
+    int x = 1;
 
     generatePolynomial(filename, nPolynomial, nMember);
 

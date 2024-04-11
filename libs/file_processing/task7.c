@@ -67,10 +67,12 @@ void customSort(int *numbers, int length) {
         index++;
     }
 
-    for(int i=0; i < length; i++) {
+    int half_length = length / 2;
+    
+    for(int i = 0; i < length; i++) {
         numbers[i] = a[i];
-        if (i >= 10) {
-            numbers[i] = b[i % 10];
+        if (i >= half_length) {
+            numbers[i] = b[i % half_length];
         }
     }
 }

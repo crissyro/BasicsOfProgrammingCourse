@@ -68,6 +68,7 @@ void getTopOfBestAthletes(const char* filename, const char* outputFilename, int*
     qsort(athletes, *numAthletes, sizeof(Athlete), compareAthletes);
 
     printf("Top %d athletes:\n", *numBestAthletes);
+    
     for (int i = 0; i < *numBestAthletes && i < *numAthletes; i++) {
         printf("%s - Best Result: %.2f\n", athletes[i].name, athletes[i].bestResult);
     }
