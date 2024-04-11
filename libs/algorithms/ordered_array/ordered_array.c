@@ -28,38 +28,43 @@ size_t ordered_array_set_in(ordered_array_set *set, int value) {
 }
 
 bool ordered_array_set_isEqual(ordered_array_set set1, ordered_array_set set2) {
-    if (set1.size != set2.size)
-        return 0;
- 
-    return memcmp(set1.data, set2.data, sizeof(int) * set1.size) == 0;
+    return (!memcmp(set1.data, set2.data, set1.size)) ? true : false;
 }
 
-bool ordered_array_set_isSubset(ordered_array_set subset, ordered_array_set set) {
-    for (size_t i = 0; i < subset.size; i++) {
-        for (size_t j = 0; j < set.size; j++) {
-            if (subset.data[i] == set.data[j]) {
-                return true;
-            }
+//верно ли, что массив В содержит каждый элемент массива А.
+int Check_Every_A_Elements(int *a, int *b, size_t n, size_t k) {
+    int i = 0;
+    int j = 0;
+    int counter = 0;
+    while (i < k ) {
+        if (b[i] == a[j]) {
+            counter++;
+            i++;
+            j++;
+        } else {
+            i++;
+            j++;
         }
     }
-
-    return false;
+    return counter == n ? 1 : 0;
 }
+
+// возвращает значение ’истина’, если subset является подмножеством set
+// иначе - ’ложь’
+bool ordered_array_set_isSubset(ordered_array_set subset, ordered_array_set set) {
+    return (Check_Every_A_Elements(subset.data, set.data, subset.size, set.size)) ? true : false;
+}
+
 
 void ordered_array_set_isAbleAppend(ordered_array_set *set) {
     assert(set -> size < set -> capacity);
 }
 
-void ordered_array_set_insert(ordered_array_set* set, int value) {
-    ordered_array_set_isAbleAppend(set);
-    size_t i = set->size;
-
-    while (i > 0 && set->data[i - 1] > value) {
-        set->data[i] = set->data[i - 1];
-        i--;
+void ordered_array_set_insert(ordered_array_set *set, int value) {
+    if (ordered_array_set_in(set, value) != -1) {
+        ordered_array_set_isAbleAppend(set);
+        append_(set->data, (size_t *) set->size, value);
     }
-
-    append_(set -> data, &set -> size, value);
 }
 
 void ordered_array_set_deleteElement(ordered_array_set *set, int value) {
