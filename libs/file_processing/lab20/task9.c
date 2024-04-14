@@ -14,6 +14,7 @@ FILE* openFile(const char* filename, const char* mode) {
 
 void generateNumbers(const char* filename, int count) {
     FILE* file = openFile(filename, "w");
+    
     srand(time(NULL));
 
     for (int i = 0; i < count; i++) {

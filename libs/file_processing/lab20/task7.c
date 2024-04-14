@@ -1,27 +1,28 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-struct TreeNode {
+typedef struct TreeNode {
     int value;
     struct TreeNode *left;
     struct TreeNode *right;
-};
+} TreeNode;
 
-struct TreeNode* newNode(int value) {
-    struct TreeNode* node = (struct TreeNode*)malloc(sizeof(struct TreeNode));
+TreeNode* newNode(int value) {
+    TreeNode* node = (TreeNode*)malloc(sizeof(TreeNode));
     node->value = value;
     node->left = NULL;
     node->right = NULL;
     return node;
 }
 
-struct TreeNode* constructMaximumBinaryTree(int* nums, int numsSize) {
+TreeNode* constructMaximumBinaryTree(int* nums, int numsSize) {
     if (numsSize == 0) {
         return NULL;
     }
 
     int max_value = nums[0];
     int max_index = 0;
+    
     for (int i = 1; i < numsSize; ++i) {
         if (nums[i] > max_value) {
             max_value = nums[i];
@@ -29,7 +30,7 @@ struct TreeNode* constructMaximumBinaryTree(int* nums, int numsSize) {
         }
     }
 
-    struct TreeNode* root = newNode(max_value);
+    TreeNode* root = newNode(max_value);
 
     root->left = constructMaximumBinaryTree(nums, max_index);
 
@@ -38,7 +39,7 @@ struct TreeNode* constructMaximumBinaryTree(int* nums, int numsSize) {
     return root;
 }
 
-void printInorder(struct TreeNode* root) {
+void printInorder(TreeNode* root) {
     if (root == NULL) return;
     printf("%d", root->value);
     printInorder(root->left);
@@ -49,7 +50,7 @@ int main() {
     int nums[] = {3, 2, 1, 6, 0, 5};
     int numsSize = sizeof(nums) / sizeof(nums[0]);
 
-    struct TreeNode* root = constructMaximumBinaryTree(nums, numsSize);
+    TreeNode* root = constructMaximumBinaryTree(nums, numsSize);
 
     printInorder(root);
     printf("\n");

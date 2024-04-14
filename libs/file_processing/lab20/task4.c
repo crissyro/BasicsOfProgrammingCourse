@@ -11,7 +11,9 @@ typedef struct Domain {
 
 Domain getDomain(char *s) {
     Domain domain;
+    
     sscanf(s, "%d %s", &domain.count, domain.name);
+
     return domain;
 }
 
@@ -35,6 +37,7 @@ void getAllDomain(Domain *arrayDomains, int *sizeArrayDomains, Domain domain) {
         if (*domainName == '.') {
             getSubDomain(arrayDomains, sizeArrayDomains, domainName + 1, domain.count);
         }
+
         domainName++;
     }
     
