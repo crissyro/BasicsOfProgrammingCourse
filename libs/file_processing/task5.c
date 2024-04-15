@@ -1,8 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
-#include <string.h>
 #include <time.h>
+#include "C:/Users/fatee/ClionProjects/course/libs/string_/string_.c"
 
 #define MAX_WORD_LENGTH 20
 #define NUM_WORDS_TO_GENERATE 10
@@ -22,7 +22,7 @@ void generateRandomWords(const char* filename) {
     FILE* file = openFile(filename, "w");
 
     char alphabet[] = "abcdefghijklmnopqrstuvwxyz";
-    int alphabet_length = strlen(alphabet);
+    int alphabet_length = strlen_(alphabet);
 
     srand(time(NULL));
 
@@ -53,17 +53,17 @@ void maxWords(const char* inputFilename, const char* outputFilename) {
     char max_word[MAX_WORD_LENGTH] = "";
 
     while (fgets(line, sizeof(line), inputFile) != NULL) {
-        char* token = strtok(line, " \n");
+        char* token = strtok_(line, " \n");
         int max_length = 0;
 
         while (token != NULL) {
-            int length = strlen(token);
+            int length = strlen_(token);
             if (length > max_length) {
                 max_length = length;
-                strcpy(max_word, token);
+                copy2(token, token + strlen_(token), max_word);
             }
 
-            token = strtok(NULL, " \n");
+            token = strtok_(NULL, " \n");
         }
 
         fprintf(outputFile, "%s\n", max_word);
@@ -84,17 +84,17 @@ void checkReceivedWords(const char* inputFilename, const char* outputFilename) {
     bool all_lengths_matched = true;
 
     while (fgets(input_line, sizeof(input_line), inputFile) != NULL && fscanf(outputFile, "%s", output_word) == 1) {
-        char* token = strtok(input_line, " \n");
+        char* token = strtok_(input_line, " \n");
 
         while (token != NULL) {
-            int input_length = strlen(token);
-            int output_length = strlen(output_word);
+            int input_length = strlen_(token);
+            int output_length = strlen_(output_word);
 
             if (input_length > output_length) {
                 all_lengths_matched = false;
             }
 
-            token = strtok(NULL, " \n");
+            token = strtok_(NULL, " \n");
             fscanf(outputFile, "%s", output_word);
         }
 

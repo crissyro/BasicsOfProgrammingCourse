@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
+#include "C:/Users/fatee/ClionProjects/course/libs/string_/string_.c"
 
 #define MAX_NAME_LENGTH 50
 
@@ -95,7 +95,7 @@ void readOrders(const char* filename, Order** orders, int* numOrders) {
 void updateProducts(Product* products, int numProducts, Order* orders, int numOrders) {
     for (int i = 0; i < numOrders; i++) {
         for (int j = 0; j < numProducts; j++) {
-            if (strcmp(orders[i].name, products[j].name) == 0) {
+            if (strcmp_(orders[i].name, products[j].name) == 0) {
                 products[j].quantity -= orders[i].quantity;
                 if (products[j].quantity <= 0) {
                     for (int k = j; k < numProducts - 1; k++) {

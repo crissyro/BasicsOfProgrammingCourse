@@ -2,14 +2,9 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include <time.h>
+#include "C:/Users/fatee/ClionProjects/course/libs/data_structures/matrix/matrix.c"
 
 #define MAX_ELEMENT 100
-#define MAX_SIZE 10
-
-typedef struct {
-    int nRows;
-    int values[MAX_SIZE][MAX_SIZE];
-} Matrix;
 
 FILE* openFile(const char* filename, const char* mode) {
     FILE* file = fopen(filename, mode);
@@ -45,28 +40,6 @@ void generateMatrixFile(const char* filename, int nMatrices, int orderMatrix) {
     fclose(file);
 }
 
-bool isSymmetricMatrix(Matrix *m) {
-    for (int i = 0; i < m->nRows; i++) {
-        for (int j = 0; j < i; j++) {
-            if (m->values[i][j] != m->values[j][i]) {
-                return false;
-            }
-        }
-    }
-
-    return true;
-}
-
-void transposeSquareMatrix(Matrix *m) {
-    for (int i = 0; i < m->nRows; i++) {
-        for (int j = i + 1; j < m->nRows; j++) {
-            int temp = m->values[i][j];
-            m->values[i][j] = m->values[j][i];
-            m->values[j][i] = temp;
-        }
-    }
-}
-
 void getTransformedMatrices(const char* inputFilename, const char* outputFilename) {
     FILE *inputFile = openFile(inputFilename, "rb");
     FILE *outputFile = openFile(outputFilename, "wb");
@@ -76,36 +49,29 @@ void getTransformedMatrices(const char* inputFilename, const char* outputFilenam
     fwrite(&nMatrices, sizeof(int), 1, outputFile);
 
     for (int i = 0; i < nMatrices; i++) {
-        Matrix matrix;
-        fread(&matrix.nRows, sizeof(int), 1, inputFile);
+        int nRows;
+        fread(&nRows, sizeof(int), 1, inputFile);
+        matrix m = getMemMatrix(nRows, nRows);
 
-        for (int j = 0; j < matrix.nRows; j++) {
-            fread(&matrix.values[j], sizeof(int), matrix.nRows, inputFile);
+        for (int j = 0; j < nRows; j++) {
+            fread(m.values[j], sizeof(int), nRows, inputFile);
         }
 
-        if (!isSymmetricMatrix(&matrix)) {
-            transposeSquareMatrix(&matrix);
+        if (!isSymmetricMatrix(&m)) {
+            transposeSquareMatrix(&m);
         }
 
-        fwrite(&matrix.nRows, sizeof(int), 1, outputFile);
+        fwrite(&nRows, sizeof(int), 1, outputFile);
 
-        for (int j = 0; j < matrix.nRows; j++) {
-            fwrite(&matrix.values[j], sizeof(int), matrix.nRows, outputFile);
+        for (int j = 0; j < nRows; j++) {
+            fwrite(m.values[j], sizeof(int), nRows, outputFile);
         }
+
+        freeMatrix(&m);
     }
 
     fclose(inputFile);
     fclose(outputFile);
-}
-
-void printMatrix(const Matrix *m) {
-    for (int i = 0; i < m->nRows; i++) {
-        for (int j = 0; j < m->nRows; j++) {
-            printf("%d ", m->values[i][j]);
-        }
-
-        printf("\n");
-    }
 }
 
 void printMatrixFile(const char* filename) {
@@ -115,16 +81,19 @@ void printMatrixFile(const char* filename) {
     fread(&nMatrices, sizeof(int), 1, file);
 
     for (int i = 0; i < nMatrices; i++) {
-        Matrix matrix;
-        fread(&matrix.nRows, sizeof(int), 1, file);
+        int nRows;
+        fread(&nRows, sizeof(int), 1, file);
+        matrix m = getMemMatrix(nRows, nRows);
 
-        for (int j = 0; j < matrix.nRows; j++) {
-            fread(&matrix.values[j], sizeof(int), matrix.nRows, file);
+        for (int j = 0; j < nRows; j++) {
+            fread(m.values[j], sizeof(int), nRows, file);
         }
 
         printf("Matrix %d:\n", i + 1);
-        printMatrix(&matrix);
+        outputMatrix(m);
         printf("\n");
+
+        freeMatrix(&m);
     }
 
     fclose(file);

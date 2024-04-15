@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
+#include <assert.h>
 #include "C:/Users/fatee/ClionProjects/course/libs/data_structures/matrix/matrix.h"
 
 matrix getMemMatrix(int nRows, int nCols) {
@@ -27,6 +28,14 @@ void freeMemMatrix(matrix *m) {
     }
 
     free(m);
+}
+
+void freeMatrix(matrix *m) {
+    for (int i = 0; i < m->nRows; i++) {
+        free(m->values[i]);
+    }
+    
+    free(m->values);
 }
 
 void freeMemMatrices(matrix *ms, int nMatrices) {
