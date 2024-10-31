@@ -23,6 +23,9 @@ matrix *getMemArrayOfMatrices(int nMatrices, int nRows, int nCols) ;
 //освобождает память, выделенную под хранение матрицы m
 void freeMemMatrix(matrix *m) ;
 
+//освобождает память, выделенную под хранение матрицы m
+void freeMatrix(matrix *m) ;
+
 //освобождает память, выделенную под хранение массива ms из nMatrices матриц
 void freeMemMatrices(matrix *ms, int nMatrices) ;
 
@@ -86,5 +89,8 @@ matrix createMatrixFromArray(const int *a, int nRows, int nCols) ;
 //возвращает указатель на нулевую матрицу массива из nMatrices матриц, 
 //размещенных в динамической памяти, построенных из элементов массива a
 matrix *createArrayOfMatrixFromArray(const int *values, size_t nMatrices, size_t nRows, size_t nCols) ;
+
+//копирование матрицы
+matrix copyMatrix(matrix *original) ;
 
 #endif

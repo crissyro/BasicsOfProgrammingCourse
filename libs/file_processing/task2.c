@@ -4,7 +4,18 @@
 
 #define MAX_SIZE 15
 
+FILE* openFile(const char* filename, const char* mode) {
+    FILE* file = fopen(filename, mode);
+    if (file == NULL) {
+        printf("File opening error.\n");
+        exit(1);
+    }
+    
+    return file;
+}
+
 void generateRandomFixedPointNumbers(FILE *file, int count) {
+    srand(time(NULL));
     for (int i = 0; i < count; i++) {
         double number = ((double)rand() / RAND_MAX) * 1000.0;
         fprintf(file, "%lf\n", number);
@@ -24,28 +35,17 @@ void writeFloatingPointNumbers(FILE *file, double numbers[], int count) {
     }
 }
 
-FILE* openFile(const char* filename, const char* mode) {
-    FILE* file = fopen(filename, mode);
-    if (file == NULL) {
-        printf("File opening error.\n");
-        exit(1);
-    }
-    
-    return file;
-}
+void generateRandomFixedPointNumbers_(const char* inputFile, int numberOfNumbersToGenerate) {
+    FILE *file = openFile(inputFile, "w");
 
-int main() {
-    srand(time(NULL));
-
-    FILE *file = openFile("C:/Users/fatee/ClionProjects/course/libs/file_processing/input.txt", "w");
-
-    int numberOfNumbersToGenerate = 5;
     generateRandomFixedPointNumbers(file, numberOfNumbersToGenerate);
 
     fclose(file);
+}
 
-    FILE *inputFile = openFile("C:/Users/fatee/ClionProjects/course/libs/file_processing/input.txt", "r");
-    FILE *outputFile = openFile("C:/Users/fatee/ClionProjects/course/libs/file_processing/output.txt", "w");
+void getFloatingPointNumbers(const char* input, const char* output) {
+    FILE *inputFile = openFile(input, "r");
+    FILE *outputFile = openFile(output, "w");
 
     double numbers[MAX_SIZE];
     int count;
@@ -55,9 +55,11 @@ int main() {
 
     fclose(inputFile);
     fclose(outputFile);
+}
 
-    inputFile = openFile("C:/Users/fatee/ClionProjects/course/libs/file_processing/input.txt", "r");
-    outputFile = openFile("C:/Users/fatee/ClionProjects/course/libs/file_processing/output.txt", "r");
+void checkFloatingPointNumbers(const char* input, const char* output, int numberOfNumbersToGenerate){
+    FILE *inputFile = openFile(input, "r");
+    FILE *outputFile = openFile(output, "r");
 
     int numberOfNumbersToCheck = numberOfNumbersToGenerate;
     int testCount = 1;
@@ -79,6 +81,19 @@ int main() {
 
     fclose(inputFile);
     fclose(outputFile);
+}
+
+int main() {
+    const char* inputFile = "C:/Users/fatee/ClionProjects/course/libs/file_processing/input.txt";
+    const char* outputFile = "C:/Users/fatee/ClionProjects/course/libs/file_processing/output.txt";
+
+    int numberOfNumbersToGenerate = 5;
+
+    generateRandomFixedPointNumbers_(inputFile, numberOfNumbersToGenerate);
+
+    getFloatingPointNumbers(inputFile, outputFile);
+
+    checkFloatingPointNumbers(inputFile, outputFile, numberOfNumbersToGenerate);
 
     printf("The result is written to a file output.txt\n");
 

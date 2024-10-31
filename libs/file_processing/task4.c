@@ -1,8 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
-#include <string.h>
 #include <time.h>
+#include "C:/Users/fatee/ClionProjects/course/libs/string_/string_.c"
 
 #define MAX_WORD_LENGTH 50
 #define NUM_WORDS_TO_GENERATE 500
@@ -21,7 +21,7 @@ void generateRandomWords(const char* filename) {
     FILE* file = openFile(filename, "w");
 
     char alphabet[] = "abcdefghijklmnopqrstuvwxyz";
-    int alphabet_length = strlen(alphabet);
+    int alphabet_length = strlen_(alphabet);
 
     srand(time(NULL));
 
@@ -47,7 +47,7 @@ void filterWords(const char* inputFilename, const char* outputFilename, const ch
     char word[MAX_WORD_LENGTH];
 
     while (fscanf(inputFile, "%s", word) == 1) {
-        if (strstr(word, sequence) != NULL) {
+        if (strstr_(word, sequence) != NULL) {
             fprintf(outputFile, "%s\n", word);
         }
     }
@@ -63,13 +63,14 @@ bool checkSequence(const char* filename, const char* sequence) {
     bool allContainSequence = true;
 
     while (fscanf(file, "%s", word) == 1) {
-        if (strstr(word, sequence) == NULL) {
+        if (strstr_(word, sequence) == NULL) {
             allContainSequence = false;
             break;
         }
     }
 
     fclose(file);
+    
     return allContainSequence;
 }
 

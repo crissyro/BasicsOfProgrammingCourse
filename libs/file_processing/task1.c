@@ -1,146 +1,132 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+#include "C:/Users/fatee/ClionProjects/course/libs/data_structures/matrix/matrix.c"
 
 #define MAX_SIZE 10
 #define MAX_ELEMENT 100
+
+FILE *openFile(const char *filename, const char *mode) {
+    FILE *file = fopen(filename, mode);
+    if (file == NULL) {
+        printf("File opening error.\n");
+        exit(1);
+    }
+    
+    return file;
+}
 
 void generateRandomMatrix(FILE *file) {
     int orderMatrix = rand() % MAX_SIZE + 1;
 
     fprintf(file, "%d\n", orderMatrix);
+    srand(time(NULL));
 
     for (int i = 0; i < orderMatrix; i++) {
         for (int j = 0; j < orderMatrix; j++) {
             int matrixElement = rand() % (2 * MAX_ELEMENT + 1) - MAX_ELEMENT;
             fprintf(file, "%d ", matrixElement);
         }
-
         fprintf(file, "\n");
     }
 }
 
-void readMatrix(FILE *file, int matrix[MAX_SIZE][MAX_SIZE], int *order) {
-    fscanf(file, "%d", order);
-    for (int i = 0; i < *order; i++) {
-        for (int j = 0; j < *order; j++) {
-            fscanf(file, "%d", &matrix[i][j]);
-        }
-    }
-}
-
-void writeMatrix(FILE *file, int matrix[MAX_SIZE][MAX_SIZE], int order) {
-    fprintf(file, "%d\n", order);
-
-    for (int j = 0; j < order; j++) {
-        for (int i = 0; i < order; i++) {
-            fprintf(file, "%d ", matrix[i][j]);
-        }
-
-        fprintf(file, "\n");
-    }
-}
-
-FILE* openFile(const char* filename, const char* mode) {
-    FILE* file = fopen(filename, mode);
-    if (file == NULL) {
-        printf("File opening error.\n");
-        exit(1);
-    }
-
-    return file;
-}
-
-void generateMultipleMatrices(FILE* file, int numberOfMatrices) {
+void generateMultipleMatrices(FILE *file, int numberOfMatrices) {
     for (int i = 0; i < numberOfMatrices; i++) {
         generateRandomMatrix(file);
         fprintf(file, "\n");
     }
 }
 
-void transposeMatrix(int matrix[MAX_SIZE][MAX_SIZE], int order) {
-    int temp;
-    for (int i = 0; i < order; i++) {
-        for (int j = i + 1; j < order; j++) {
-            temp = matrix[i][j];
-            matrix[i][j] = matrix[j][i];
-            matrix[j][i] = temp;
+void readMatrix(FILE *file, matrix *m) {
+    fscanf(file, "%d", &(m->nRows));
+    m->nCols = m->nRows;
+
+    m->values = (int **)malloc(sizeof(int *) * m->nRows);
+    for (int i = 0; i < m->nRows; i++) {
+        m->values[i] = (int *)malloc(sizeof(int) * m->nCols);
+    }
+
+    for (int i = 0; i < m->nRows; i++) {
+        for (int j = 0; j < m->nCols; j++) {
+            fscanf(file, "%d", &(m->values[i][j]));
         }
     }
 }
 
-int compareMatrices(int matrix1[MAX_SIZE][MAX_SIZE], int matrix2[MAX_SIZE][MAX_SIZE], int order) {
-    for (int i = 0; i < order; i++) {
-        for (int j = 0; j < order; j++) {
-            if (matrix1[i][j] != matrix2[i][j]) {
-                return 0;
-            }
+void writeMatrix(FILE *file, matrix m) {
+    fprintf(file, "%d\n", m.nRows);
+
+    for (int i = 0; i < m.nRows; i++) {
+        for (int j = 0; j < m.nCols; j++) {
+            fprintf(file, "%d ", m.values[i][j]);
         }
+        fprintf(file, "\n");
     }
-    
-    return 1;
 }
 
-int main() {
-    srand(time(NULL));
+void generateMultipleMatrices_(const char *inputFile, int numberOfMatricesToGenerate) {
+    FILE *file = openFile(inputFile, "w");
 
-    FILE *file = openFile("C:/Users/fatee/ClionProjects/course/libs/file_processing/input.txt", "w");
-
-    int numberOfMatricesToGenerate = 3;
     generateMultipleMatrices(file, numberOfMatricesToGenerate);
 
     fclose(file);
+}
 
-    FILE *inputFile = openFile("C:/Users/fatee/ClionProjects/course/libs/file_processing/input.txt", "r");
-    FILE *outputFile = openFile("C:/Users/fatee/ClionProjects/course/libs/file_processing/output.txt", "w");
-
-    int orderMatrix;
-    int matrix[MAX_SIZE][MAX_SIZE];
+void getTransposedMatrix(const char *input, const char *output, int numberOfMatricesToGenerate) {
+    FILE *inputFile = openFile(input, "r");
+    FILE *outputFile = openFile(output, "w");
 
     while (numberOfMatricesToGenerate) {
-        readMatrix(inputFile, matrix, &orderMatrix);
-        writeMatrix(outputFile, matrix, orderMatrix);
+        matrix m;
+        readMatrix(inputFile, &m);
+        transposeMatrix(&m);
+        writeMatrix(outputFile, m);
         numberOfMatricesToGenerate--;
     }
 
     fclose(inputFile);
     fclose(outputFile);
+}
 
-    inputFile = openFile("C:/Users/fatee/ClionProjects/course/libs/file_processing/input.txt", "r");
-    outputFile = openFile("C:/Users/fatee/ClionProjects/course/libs/file_processing/output.txt", "r");
+void checkTransformationOfMatrices(const char *input, const char *output, int numberOfMatricesToCheck) {
+    FILE *inputFile = openFile(input, "r");
+    FILE *outputFile = openFile(output, "r");
 
-    int numberOfMatricesToGenerate2 = 3;
     int count = 1;
 
-    while (numberOfMatricesToGenerate2) {
-        int orderMatrix1;
-        int matrix1[MAX_SIZE][MAX_SIZE]; 
+    while (numberOfMatricesToCheck) {
+        matrix m1;
+        matrix m2;
 
-        int orderMatrix2;
-        int matrix2[MAX_SIZE][MAX_SIZE];
+        readMatrix(outputFile, &m1);
+        readMatrix(inputFile, &m2);
 
-        readMatrix(outputFile, matrix1, &orderMatrix1);
-        transposeMatrix(matrix1, orderMatrix1);
-
-        readMatrix(inputFile, matrix2, &orderMatrix2);
-
-        if (orderMatrix1 != orderMatrix2) {
-            printf("The sizes of the matrices do not match.\n");
-            return 1;
-        }
-
-        if (compareMatrices(matrix1, matrix2, orderMatrix1)) {
+        if (areTwoMatricesEqual(&m1, &m2)) {
             printf("The matrix %d is transformed correctly.\n", count);
         } else {
             printf("The matrix %d was transformed incorrectly.\n", count);
         }
 
         count++;
-        numberOfMatricesToGenerate2--;
+        numberOfMatricesToCheck--;
     }
 
     fclose(inputFile);
     fclose(outputFile);
+}
+
+int main() {
+    const char* inputFile = "C:/Users/fatee/ClionProjects/course/libs/file_processing/input.txt";
+    const char* outputFile = "C:/Users/fatee/ClionProjects/course/libs/file_processing/output.txt";
+
+    int numberOfMatricesToGenerate = 3;
+
+    generateMultipleMatrices_(inputFile, numberOfMatricesToGenerate);
+
+    getTransposedMatrix(inputFile, outputFile, numberOfMatricesToGenerate);
+
+    checkTransformationOfMatrices(inputFile, outputFile, numberOfMatricesToGenerate);
 
     printf("The result is written to a file output.txt\n");
 
